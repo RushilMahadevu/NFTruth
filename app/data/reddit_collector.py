@@ -25,7 +25,8 @@ class RedditDataCollector:
             'nft_specific': ['NFT', 'NFTs', 'opensea', 'NFTsMarketplace', 'CryptoPunks'],
             'ethereum': ['ethereum', 'ethtrader', 'ethfinance', 'EthereumClassic'],
             'trading_focused': ['wallstreetbets', 'CryptoMoonShots', 'SatoshiStreetBets'],
-            'tech_analysis': ['CryptoTechnology', 'cryptodevs', 'ethdev']
+            'tech_analysis': ['CryptoTechnology', 'ethdev'],
+            'blockchain_general': ['blockchainstartups']
         }
 
     def get_access_token(self) -> bool:

@@ -1,6 +1,3 @@
-"""
-Simple test script to verify the model setup works
-"""
 import json
 import pandas as pd
 import numpy as np
