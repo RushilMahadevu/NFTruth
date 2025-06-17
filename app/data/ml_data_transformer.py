@@ -4,12 +4,13 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass
 import numpy as np
-from opensea_collector import get_opensea_collection
+from opensea_collector import get_opensea_collection, get_opensea_collection_stats
 from etherscan_collector import get_etherscan_wallet_tx
 from reddit_collector import RedditDataCollector
 import os
 from dotenv import load_dotenv
 import time
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 load_dotenv()
 
@@ -62,6 +63,9 @@ class MLDataTransformer:
             user_agent=os.getenv("REDDIT_USER_AGENT")
         )
         
+        # Initialize VADER sentiment analyzer
+        self.sentiment_analyzer = SentimentIntensityAnalyzer()
+        
         # Scam indicator keywords
         self.scam_keywords = [
             'scam', 'rugpull', 'rug pull', 'avoid', 'warning', 'fake', 'fraud',
@@ -102,7 +106,7 @@ class MLDataTransformer:
             collection_features, trading_features, social_features, blockchain_features
         )
         
-        # Combine all features
+        # Combine all features  
         return NFTScamFeatures(
             **collection_features,
             **trading_features,
@@ -401,34 +405,21 @@ class MLDataTransformer:
         return min(circular_count / max(len(transactions), 1), 1.0)
 
     def _analyze_sentiment(self, texts: List[str]) -> float:
-        """Simple sentiment analysis (can be improved with proper NLP)"""
+        """Use VADER sentiment analysis for more accurate sentiment scoring"""
         if not texts:
             return 0.5
         
-        positive_words = ['great', 'amazing', 'love', 'buy', 'hold', 'moon', 'gem', 'bullish']
-        negative_words = ['scam', 'avoid', 'fake', 'rug', 'dump', 'bearish', 'sell', 'warning']
-        
-        total_sentiment = 0
-        word_count = 0
-        
+        scores = []
         for text in texts:
-            if not text:
-                continue
-            words = text.lower().split()
-            for word in words:
-                if word in positive_words:
-                    total_sentiment += 1
-                    word_count += 1
-                elif word in negative_words:
-                    total_sentiment -= 1
-                    word_count += 1
+            if text:
+                score = self.sentiment_analyzer.polarity_scores(text)
+                scores.append(score['compound'])  # Compound score ranges from -1 to 1
         
-        if word_count == 0:
+        if not scores:
             return 0.5
         
-        # Normalize to 0-1 scale
-        normalized = (total_sentiment / word_count + 1) / 2
-        return max(0, min(1, normalized))
+        # Convert from [-1, 1] to [0, 1]
+        return (np.mean(scores) + 1) / 2
 
     def _calculate_enthusiasm_score(self, texts: List[str]) -> float:
         """Calculate enthusiasm/hype score"""
@@ -580,30 +571,71 @@ class MLDataTransformer:
         
         print(f"Dataset saved to {filename}")
 
+    def extract_opensea_features(self, collection_slug: str) -> dict:
+        """Extract features from OpenSea collection data"""
+        try:
+            # Get basic collection info
+            collection_data = get_opensea_collection(collection_slug)
+            # Get collection statistics
+            stats_data = get_opensea_collection_stats(collection_slug)
+            
+            features = {}
+            
+            # Extract from collection data
+            if collection_data:
+                features.update({
+                    'total_supply': collection_data.get('total_supply', 0),
+                    'is_verified': 1 if collection_data.get('safelist_status') == 'verified' else 0,
+                    'has_discord': 1 if collection_data.get('discord_url') else 0,
+                    'has_twitter': 1 if collection_data.get('twitter_username') else 0,
+                    'trait_offers_enabled': 1 if collection_data.get('trait_offers_enabled', False) else 0,
+                    'collection_offers_enabled': 1 if collection_data.get('collection_offers_enabled', False) else 0,
+                })
+            
+            # Extract from stats data
+            if stats_data:
+                features.update({
+                    'floor_price': float(stats_data.get('floor_price', 0) or 0),
+                    'market_cap': float(stats_data.get('market_cap', 0) or 0),
+                    'total_volume': float(stats_data.get('total_volume', 0) or 0),
+                    'num_owners': int(stats_data.get('num_owners', 0) or 0),
+                    'average_price': float(stats_data.get('average_price', 0) or 0),
+                })
+            
+            return features
+            
+        except Exception as e:
+            print(f"Error extracting OpenSea features for {collection_slug}: {e}")
+            return {}
+
+    def debug_opensea_response(self, collection_slug: str):
+        """Debug function to see what OpenSea API is returning"""
+        print(f"\n{'='*50}")
+        print(f"DEBUGGING OPENSEA API FOR: {collection_slug}")
+        print(f"{'='*50}")
+        
+        try:
+            # Test collection endpoint
+            collection_data = get_opensea_collection(collection_slug)
+            print(f"Collection data keys: {list(collection_data.keys()) if collection_data else 'None'}")
+            
+            # Test stats endpoint
+            stats_data = get_opensea_collection_stats(collection_slug)
+            print(f"Stats data keys: {list(stats_data.keys()) if stats_data else 'None'}")
+            print(f"Stats data: {stats_data}")
+            
+        except Exception as e:
+            print(f"Error: {e}")
+            import traceback
+            traceback.print_exc()
+
 # Example usage
 if __name__ == "__main__":
     transformer = MLDataTransformer()
     
-    # Example collections (mix of legitimate and potential scams)
-    test_collections = [
-        "boredapeyachtclub",  # Legitimate
-        "cryptopunks",        # Legitimate  
-        # "azuki",             # Legitimate - commented out for faster testing
-    ]
+    # Debug each collection first
+    test_collections = ["boredapeyachtclub", "cryptopunks", "azuki"]
+    for collection in test_collections:
+        transformer.debug_opensea_response(collection)
     
-    # Create training dataset
-    dataset = transformer.create_training_dataset(test_collections)
-    
-    # Save for ML model training
-    transformer.save_dataset(dataset, "nft_scam_training_data.json")
-    
-    print(f"Created dataset with {len(dataset)} samples")
-    
-    # Display sample features
-    if dataset:
-        sample = dataset[0]
-        print(f"\nSample features for {test_collections[0]}:")
-        print(f"Collection age: {sample.collection_age_days} days")
-        print(f"Holder count: {sample.holder_count}")
-        print(f"Reddit mentions: {sample.reddit_mention_count}")
-        print(f"Overall scam probability: {sample.overall_scam_probability:.3f}")
+    # Then run your normal code...
