@@ -1,0 +1,68 @@
+{
+  "metadata": {
+    "created_at": "2025-06-17T09:28:29.969804",
+    "total_records": 3,
+    "collections": [
+      "boredapeyachtclub",
+      "cryptopunks",
+      "azuki"
+    ],
+    "description": "NFT features extracted for ML training"
+  },
+  "features": [
+    {
+      "collection_slug": "boredapeyachtclub",
+      "token_id": null,
+      "total_supply": 9998,
+      "is_verified": 1,
+      "has_discord": 1,
+      "has_twitter": 1,
+      "trait_offers_enabled": 1,
+      "collection_offers_enabled": 1,
+      "floor_price": 11.749999,
+      "market_cap": 126483.05127058823,
+      "total_volume": 1612729.404059671,
+      "num_owners": 5501,
+      "average_price": 28.74484277799966,
+      "reddit_mentions": 1,
+      "reddit_sentiment": 0.5,
+      "reddit_engagement": 1
+    },
+    {
+      "collection_slug": "cryptopunks",
+      "token_id": null,
+      "total_supply": 9994,
+      "is_verified": 1,
+      "has_discord": 1,
+      "has_twitter": 1,
+      "trait_offers_enabled": 0,
+      "collection_offers_enabled": 0,
+      "floor_price": 0.0,
+      "market_cap": 490744.5069565217,
+      "total_volume": 1367497.1424793045,
+      "num_owners": 3868,
+      "average_price": 51.51036396260752,
+      "reddit_mentions": 5,
+      "reddit_sentiment": 0.5,
+      "reddit_engagement": 5
+    },
+    {
+      "collection_slug": "azuki",
+      "token_id": null,
+      "total_supply": 10000,
+      "is_verified": 1,
+      "has_discord": 1,
+      "has_twitter": 1,
+      "trait_offers_enabled": 1,
+      "collection_offers_enabled": 1,
+      "floor_price": 2.149995,
+      "market_cap": 24206.28342709376,
+      "total_volume": 840286.6544176422,
+      "num_owners": 4161,
+      "average_price": 8.988368893926815,
+      "reddit_mentions": 0,
+      "reddit_sentiment": 0.5,
+      "reddit_engagement": 0
+    }
+  ]
+}

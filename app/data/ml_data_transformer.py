@@ -4,9 +4,9 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass
 import numpy as np
-from opensea_collector import get_opensea_collection, get_opensea_collection_stats
-from etherscan_collector import get_etherscan_wallet_tx
-from reddit_collector import RedditDataCollector
+from .opensea_collector import get_opensea_collection, get_opensea_collection_stats
+from .etherscan_collector import get_etherscan_wallet_tx
+from .reddit_collector import RedditDataCollector
 import os
 from dotenv import load_dotenv
 import time
@@ -592,14 +592,15 @@ class MLDataTransformer:
                     'collection_offers_enabled': 1 if collection_data.get('collection_offers_enabled', False) else 0,
                 })
             
-            # Extract from stats data
-            if stats_data:
+            # Extract from stats data (nested under 'total' key)
+            if stats_data and 'total' in stats_data:
+                total_stats = stats_data['total']
                 features.update({
-                    'floor_price': float(stats_data.get('floor_price', 0) or 0),
-                    'market_cap': float(stats_data.get('market_cap', 0) or 0),
-                    'total_volume': float(stats_data.get('total_volume', 0) or 0),
-                    'num_owners': int(stats_data.get('num_owners', 0) or 0),
-                    'average_price': float(stats_data.get('average_price', 0) or 0),
+                    'floor_price': float(total_stats.get('floor_price', 0) or 0),
+                    'market_cap': float(total_stats.get('market_cap', 0) or 0),
+                    'total_volume': float(total_stats.get('volume', 0) or 0),  # Note: 'volume' not 'total_volume'
+                    'num_owners': int(total_stats.get('num_owners', 0) or 0),
+                    'average_price': float(total_stats.get('average_price', 0) or 0),
                 })
             
             return features
@@ -607,6 +608,54 @@ class MLDataTransformer:
         except Exception as e:
             print(f"Error extracting OpenSea features for {collection_slug}: {e}")
             return {}
+
+    def transform_collection_data(self, collection_slug: str) -> List[Dict]:
+        """
+        Transform collection data into ML-ready format
+        Returns a list of records for the collection
+        """
+        try:
+            # Extract features from different sources
+            opensea_features = self.extract_opensea_features(collection_slug)
+            reddit_features = self.extract_reddit_features(collection_slug)
+            
+            # Combine all features
+            combined_features = {
+                **opensea_features,
+                **reddit_features
+            }
+            
+            # Create a record for this collection
+            record = {
+                'collection_slug': collection_slug,
+                'features': combined_features,
+                'timestamp': datetime.now().isoformat()
+            }
+            
+            return [record]  # Return as list for consistency
+            
+        except Exception as e:
+            print(f"Error transforming data for {collection_slug}: {e}")
+            return []
+
+    def extract_reddit_features(self, collection_slug: str) -> dict:
+        """Extract features from Reddit data"""
+        try:
+            reddit_data = self._collect_reddit_data(collection_slug)
+            
+            return {
+                'reddit_mentions': reddit_data.get('total_mentions', 0),
+                'reddit_sentiment': 0.5,  # Placeholder - you can enhance this
+                'reddit_engagement': len(reddit_data.get('posts', []))
+            }
+            
+        except Exception as e:
+            print(f"Error extracting Reddit features for {collection_slug}: {e}")
+            return {
+                'reddit_mentions': 0,
+                'reddit_sentiment': 0.5,
+                'reddit_engagement': 0
+            }
 
     def debug_opensea_response(self, collection_slug: str):
         """Debug function to see what OpenSea API is returning"""
@@ -629,13 +678,11 @@ class MLDataTransformer:
             import traceback
             traceback.print_exc()
 
-# Example usage
-if __name__ == "__main__":
-    transformer = MLDataTransformer()
+# # Example usage
+# if __name__ == "__main__":
+#     transformer = MLDataTransformer()
     
-    # Debug each collection first
-    test_collections = ["boredapeyachtclub", "cryptopunks", "azuki"]
-    for collection in test_collections:
-        transformer.debug_opensea_response(collection)
-    
-    # Then run your normal code...
+#     # Debug each collection first
+#     test_collections = ["boredapeyachtclub", "cryptopunks", "azuki"]
+#     for collection in test_collections:
+#         transformer.debug_opensea_response(collection)
