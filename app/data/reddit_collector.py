@@ -333,28 +333,28 @@ class RedditDataCollector:
             print(f"Exception getting user data for {username}: {e}")
             return {}
 
-# Usage example
-if __name__ == "__main__":
-    collector = RedditDataCollector(
-        client_id=REDDIT_CLIENT_ID,
-        client_secret=REDDIT_CLIENT_SECRET, 
-        user_agent=REDDIT_USER_AGENT
-    )
+# # Usage example
+# if __name__ == "__main__":
+#     collector = RedditDataCollector(
+#         client_id=REDDIT_CLIENT_ID,
+#         client_secret=REDDIT_CLIENT_SECRET, 
+#         user_agent=REDDIT_USER_AGENT
+#     )
     
-    # Collect raw data for ML processing
-    raw_data = collector.collect_targeted_data(
-        query="Bored Ape Yacht Club",
-        categories=['nft_specific', 'crypto_general'],
-        time_filter='week',
-        include_comments=True,
-        comment_limit=25
-    )
+#     # Collect raw data for ML processing
+#     raw_data = collector.collect_targeted_data(
+#         query="Bored Ape Yacht Club",
+#         categories=['nft_specific', 'crypto_general'],
+#         time_filter='week',
+#         include_comments=True,
+#         comment_limit=25
+#     )
     
-    print(f"Collected {raw_data['metadata']['total_posts']} posts")
-    print(f"Collected {raw_data['metadata']['total_comments']} comments")
-    print(f"Categories: {list(raw_data['categories'].keys())}")
+#     print(f"Collected {raw_data['metadata']['total_posts']} posts")
+#     print(f"Collected {raw_data['metadata']['total_comments']} comments")
+#     print(f"Categories: {list(raw_data['categories'].keys())}")
     
-    # Save raw data for ML pipeline
-    import json
-    with open('reddit_raw_data.json', 'w') as f:
-        json.dump(raw_data, f, indent=2)
+#     # Save raw data for ML pipeline
+#     import json
+#     with open('reddit_raw_data.json', 'w') as f:
+#         json.dump(raw_data, f, indent=2)
