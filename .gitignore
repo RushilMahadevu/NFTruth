@@ -1,1 +1,7 @@
 .env
+
+# Model files
+model_outputs/
+*.pkl
+*.joblib
+app/models/model.py

@@ -18,6 +18,11 @@ def main():
         "boredapeyachtclub",
         "cryptopunks", 
         "azuki",
+        "doodles-official",
+        "mutant-ape-yacht-club",
+        "world-of-women",
+        "clonex",
+        "meebits"
     ]
     
     print(f"Collecting data for {len(collections)} collections...")

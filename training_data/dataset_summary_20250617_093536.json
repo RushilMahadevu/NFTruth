@@ -1,80 +1,90 @@
 {
   "metadata": {
-    "created_at": "2025-06-17T09:28:29.970149",
-    "total_records": 3,
-    "total_collections": 3,
+    "created_at": "2025-06-17T09:35:36.641353",
+    "total_records": 8,
+    "total_collections": 8,
     "collections": [
       "boredapeyachtclub",
       "cryptopunks",
-      "azuki"
+      "azuki",
+      "doodles-official",
+      "mutant-ape-yacht-club",
+      "world-of-women",
+      "clonex",
+      "meebits"
     ]
   },
   "statistics": {
     "records_per_collection": {
       "boredapeyachtclub": 1,
       "cryptopunks": 1,
-      "azuki": 1
+      "azuki": 1,
+      "doodles-official": 1,
+      "mutant-ape-yacht-club": 1,
+      "world-of-women": 1,
+      "clonex": 1,
+      "meebits": 1
     },
     "feature_coverage": {
       "total_supply": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       },
       "is_verified": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       },
       "has_discord": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       },
       "has_twitter": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       },
       "trait_offers_enabled": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       },
       "collection_offers_enabled": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       },
       "floor_price": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       },
       "market_cap": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       },
       "total_volume": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       },
       "num_owners": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       },
       "average_price": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       },
       "reddit_mentions": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       },
       "reddit_sentiment": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       },
       "reddit_engagement": {
-        "non_null_count": 3,
+        "non_null_count": 8,
         "coverage_percent": 100.0
       }
     },
     "data_quality": {
-      "complete_records": 3,
+      "complete_records": 8,
       "completion_rate": 100.0,
       "average_features_per_record": 14.0
     }
