@@ -34,6 +34,7 @@ def get_opensea_collection_stats(collection_slug: str) -> dict:
         "accept": "application/json",
         "x-api-key": OPENSEA_API_KEY
     }
+    print(f"Fetching OpenSea stats for {collection_slug}...")
     
     try:
         response = requests.get(url, headers=headers)

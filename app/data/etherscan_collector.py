@@ -21,7 +21,7 @@ def get_etherscan_wallet_tx(address: str) -> dict:
         "sort": "desc", # sort transactions by descending order (most recent first)
         "apikey": ETHERSCAN_API_KEY # your Etherscan API key
     }
-    
+    print(f"Fetching Etherscan transactions for {address}...")
     response = requests.get(url, params=params)
     
     if response.status_code == 200: # 200 means success
