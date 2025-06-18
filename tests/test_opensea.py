@@ -1,5 +1,4 @@
 import os
-import sys
 from dotenv import load_dotenv
 from ..app.data.opensea_collector import get_opensea_collection, get_opensea_collection_stats
 
