@@ -1,4 +1,4 @@
-opensea_verified_collections = [
+known_legit = [
     "boredapeyachtclub",
     "cryptopunks",
     "pudgypenguins",

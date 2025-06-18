@@ -7,6 +7,10 @@ from dotenv import load_dotenv
 from data.opensea_collector import get_opensea_collection, get_opensea_collection_stats
 from data.reddit_collector import RedditDataCollector
 from models.model import NFTAuthenticityModel
+from opensea_collections import COLLECTION_SLUGS
+from difflib import get_close_matches
+import re
+from urllib.parse import urlparse
 
 # Load environment variables
 load_dotenv()
@@ -24,6 +28,123 @@ class NFTPredictor:
         self.load_model()
         self.setup_reddit_collector()
     
+    def normalize_slug_input(self, user_input: str) -> tuple:
+        """
+        Normalize user input and find matching collection slug
+        Returns: (normalized_slug, collection_name, confidence_score)
+        """
+        if not user_input:
+            return None, None, 0.0
+        
+        # Clean and normalize input
+        cleaned_input = user_input.strip().lower()
+        cleaned_input = re.sub(r'[^a-zA-Z0-9\s-]', '', cleaned_input)  # Remove special chars except hyphens
+        cleaned_input = re.sub(r'\s+', ' ', cleaned_input)  # Normalize whitespace
+        
+        # Direct slug match (case insensitive)
+        for collection_name, slug in COLLECTION_SLUGS.items():
+            if cleaned_input == slug.lower():
+                return slug, collection_name, 1.0
+        
+        # Direct collection name match (case insensitive)
+        for collection_name, slug in COLLECTION_SLUGS.items():
+            if cleaned_input == collection_name.lower():
+                return slug, collection_name, 1.0
+        
+        # Fuzzy matching on collection names
+        collection_names = list(COLLECTION_SLUGS.keys())
+        name_matches = get_close_matches(
+            cleaned_input, 
+            [name.lower() for name in collection_names], 
+            n=3, 
+            cutoff=0.6
+        )
+        
+        if name_matches:
+            # Find the original collection name
+            for collection_name in collection_names:
+                if collection_name.lower() == name_matches[0]:
+                    return COLLECTION_SLUGS[collection_name], collection_name, 0.8
+        
+        # Fuzzy matching on slugs
+        slugs = list(COLLECTION_SLUGS.values())
+        slug_matches = get_close_matches(
+            cleaned_input, 
+            slugs, 
+            n=3, 
+            cutoff=0.6
+        )
+        
+        if slug_matches:
+            # Find the collection name for this slug
+            for collection_name, slug in COLLECTION_SLUGS.items():
+                if slug == slug_matches[0]:
+                    return slug, collection_name, 0.7
+        
+        # Partial matching - check if input is contained in any collection name or slug
+        for collection_name, slug in COLLECTION_SLUGS.items():
+            if cleaned_input in collection_name.lower() or cleaned_input in slug.lower():
+                return slug, collection_name, 0.6
+            # Also check reverse - if collection name/slug is contained in input
+            if collection_name.lower() in cleaned_input or slug.lower() in cleaned_input:
+                return slug, collection_name, 0.5
+        
+        # If no match found, return the cleaned input as-is
+        return cleaned_input, None, 0.0
+    
+    def get_suggestions(self, user_input: str, num_suggestions: int = 5) -> list:
+        """
+        Get multiple suggestions for a user input
+        Returns list of (slug, collection_name, confidence) tuples
+        """
+        if not user_input:
+            return []
+        
+        cleaned_input = user_input.strip().lower()
+        cleaned_input = re.sub(r'[^a-zA-Z0-9\s-]', '', cleaned_input)
+        
+        suggestions = []
+        
+        # Get fuzzy matches for collection names
+        collection_names = list(COLLECTION_SLUGS.keys())
+        name_matches = get_close_matches(
+            cleaned_input, 
+            [name.lower() for name in collection_names], 
+            n=num_suggestions, 
+            cutoff=0.4
+        )
+        
+        for match in name_matches:
+            for collection_name in collection_names:
+                if collection_name.lower() == match:
+                    suggestions.append((
+                        COLLECTION_SLUGS[collection_name], 
+                        collection_name, 
+                        0.8
+                    ))
+                    break
+        
+        # Get fuzzy matches for slugs
+        slugs = list(COLLECTION_SLUGS.values())
+        slug_matches = get_close_matches(
+            cleaned_input, 
+            slugs, 
+            n=num_suggestions, 
+            cutoff=0.4
+        )
+        
+        for match in slug_matches:
+            for collection_name, slug in COLLECTION_SLUGS.items():
+                if slug == match:
+                    # Avoid duplicates
+                    if not any(s[0] == slug for s in suggestions):
+                        suggestions.append((slug, collection_name, 0.7))
+                    break
+        
+        # Sort by confidence and return top suggestions
+        suggestions.sort(key=lambda x: x[2], reverse=True)
+        return suggestions[:num_suggestions]
+    
     def setup_reddit_collector(self):
         """Initialize Reddit collector with credentials from .env"""
         try:
@@ -33,7 +154,7 @@ class NFTPredictor:
             
             if client_id and client_secret and user_agent:
                 self.reddit_collector = RedditDataCollector(client_id, client_secret, user_agent)
-                print("✅ Reddit collector initialized")
+                print("❤️ Reddit collector initialized")
             else:
                 print("⚠️ Reddit credentials not found in .env file")
                 self.reddit_collector = None
@@ -206,24 +327,218 @@ class NFTPredictor:
         
         return X
 
+    def parse_opensea_url(self, url: str) -> str:
+        """
+        Extract collection slug from OpenSea URL
+        Examples:
+        - https://opensea.io/collection/cryptopunks -> cryptopunks
+        - https://opensea.io/collection/bored-ape-yacht-club -> bored-ape-yacht-club
+        """
+        try:
+            # Clean the URL
+            url = url.strip()
+            
+            # Handle various URL formats
+            if 'opensea.io/collection/' in url:
+                # Extract everything after /collection/
+                slug = url.split('opensea.io/collection/')[1]
+                # Remove any trailing parameters or fragments
+                slug = slug.split('?')[0].split('#')[0].split('/')[0]
+                return slug
+            
+            return None
+        except Exception:
+            return None
+    
+    def normalize_input(self, user_input: str) -> str:
+        """
+        Normalize any user input (slug, URL, or name) to a collection slug
+        """
+        if not user_input:
+            return None
+        
+        user_input = user_input.strip()
+        
+        # Check if it's an OpenSea URL first
+        if 'opensea.io/collection/' in user_input:
+            slug = self.parse_opensea_url(user_input)
+            if slug:
+                return slug
+        
+        # Try to find a match in our known collections
+        normalized_slug, collection_name, confidence = self.normalize_slug_input(user_input)
+        
+        # If we found a good match, use it
+        if confidence >= 0.6:
+            return normalized_slug
+        
+        # Otherwise, clean the input and use it as-is
+        cleaned = user_input.lower().replace(' ', '-')
+        cleaned = re.sub(r'[^a-z0-9-]', '', cleaned)  # Remove special chars except hyphens
+        cleaned = re.sub(r'-+', '-', cleaned)  # Collapse multiple hyphens
+        cleaned = cleaned.strip('-')  # Remove leading/trailing hyphens
+        
+        return cleaned
+
 def main():
     """Test the predictor"""
     predictor = NFTPredictor()
     
-    print("🤖 NFT Authenticity Predictor")
+    print("\n🤖 NFT Authenticity Predictor")
     print("=" * 40)
+    print("\n💡 Enter collection name, slug, or OpenSea URL")
+    print("Examples: 'CryptoPunks', 'bored-ape-yacht-club', 'https://opensea.io/collection/azuki'")
+    print("Type 'help' for examples or 'quit' to exit")
     
     while True:
-        collection_slug = input("\nEnter NFT collection slug (or 'quit' to exit): ").strip()
+        user_input = input("\nEnter NFT collection (or 'quit' to exit): ").strip()
         
-        if collection_slug.lower() == 'quit':
+        if user_input.lower() == 'quit':
             break
         
-        if not collection_slug:
-            print("Please enter a valid collection slug")
+        if user_input.lower() == 'help':
+            print("\n📚 EXAMPLES:")
+            print("=" * 40)
+            print("Collection Names:")
+            print("  • CryptoPunks")
+            print("  • Bored Ape Yacht Club")
+            print("  • Mutant Ape Yacht Club")
+            print("\nCollection Slugs:")
+            print("  • cryptopunks")
+            print("  • bored-ape-yacht-club")
+            print("  • mutant-ape-yacht-club")
+            print("\nOpenSea URLs:")
+            print("  • https://opensea.io/collection/cryptopunks")
+            print("  • https://opensea.io/collection/bored-ape-yacht-club")
             continue
         
-        result = predictor.predict_collection(collection_slug)
+        if not user_input:
+            print("Please enter a collection name, slug, or URL")
+            continue
+        
+        # Check if it's an OpenSea URL first
+        if 'opensea.io/collection/' in user_input:
+            normalized_slug = predictor.parse_opensea_url(user_input)
+            collection_name = None  # Initialize collection_name for URL inputs
+            confidence = 0.0
+            if normalized_slug:
+                print(f"✅ Extracted from URL: {normalized_slug}")
+            else:
+                print("❌ Could not parse OpenSea URL. Please try again.")
+                continue
+        else:
+            # Try to find a match in our known collections
+            normalized_slug, collection_name, confidence = predictor.normalize_slug_input(user_input)
+            
+            if confidence == 1.0:
+                # Exact match found
+                print(f"✅ Found: {collection_name} ({normalized_slug})")
+            elif confidence >= 0.6:
+                # Close match found - ask for confirmation
+                print(f"🔍 Did you mean '{collection_name}' ({normalized_slug})? ({confidence*100:.0f}% match)")
+                
+                while True:
+                    choice = input("Enter 'y' for yes, 'n' for no, or 's' to see more suggestions: ").strip().lower()
+                    
+                    if choice in ['y', 'yes']:
+                        print(f"✅ Using: {collection_name}")
+                        break
+                    elif choice in ['n', 'no']:
+                        print("🔄 Using your original input")
+                        normalized_slug = predictor.normalize_input(user_input)
+                        collection_name = None
+                        confidence = 0.0
+                        break
+                    elif choice in ['s', 'suggestions']:
+                        suggestions = predictor.get_suggestions(user_input, num_suggestions=5)
+                        if suggestions:
+                            print("\n🔍 Similar collections found:")
+                            for i, (slug, name, conf) in enumerate(suggestions, 1):
+                                print(f"   {i}. {name} ({slug}) - {conf*100:.0f}% match")
+                            print(f"   {len(suggestions)+1}. Use original input: '{user_input}'")
+                            
+                            try:
+                                selection = input(f"\nSelect 1-{len(suggestions)+1}: ").strip()
+                                if selection.isdigit():
+                                    sel_num = int(selection) - 1
+                                    if 0 <= sel_num < len(suggestions):
+                                        normalized_slug, collection_name, confidence = suggestions[sel_num]
+                                        print(f"✅ Selected: {collection_name}")
+                                        break
+                                    elif sel_num == len(suggestions):
+                                        normalized_slug = predictor.normalize_input(user_input)
+                                        collection_name = None
+                                        confidence = 0.0
+                                        print(f"✅ Using original: {user_input}")
+                                        break
+                                    else:
+                                        print("Invalid selection. Please try again.")
+                                else:
+                                    print("Please enter a number.")
+                            except ValueError:
+                                print("Please enter a valid number.")
+                        else:
+                            print("No additional suggestions found.")
+                            normalized_slug = predictor.normalize_input(user_input)
+                            collection_name = None
+                            confidence = 0.0
+                            break
+                    else:
+                        print("Please enter 'y', 'n', or 's'")
+            elif confidence > 0.0:
+                # Weak match found - show suggestions directly
+                suggestions = predictor.get_suggestions(user_input, num_suggestions=5)
+                if suggestions:
+                    print(f"🔍 '{user_input}' not found. Did you mean one of these?")
+                    for i, (slug, name, conf) in enumerate(suggestions, 1):
+                        print(f"   {i}. {name} ({slug}) - {conf*100:.0f}% match")
+                    print(f"   {len(suggestions)+1}. Use original input: '{user_input}'")
+                    
+                    while True:
+                        try:
+                            selection = input(f"\nSelect 1-{len(suggestions)+1} (or press Enter for original): ").strip()
+                            if not selection:  # User pressed Enter
+                                normalized_slug = predictor.normalize_input(user_input)
+                                collection_name = None
+                                confidence = 0.0
+                                print(f"✅ Using original: {user_input}")
+                                break
+                            elif selection.isdigit():
+                                sel_num = int(selection) - 1
+                                if 0 <= sel_num < len(suggestions):
+                                    normalized_slug, collection_name, confidence = suggestions[sel_num]
+                                    print(f"✅ Selected: {collection_name}")
+                                    break
+                                elif sel_num == len(suggestions):
+                                    normalized_slug = predictor.normalize_input(user_input)
+                                    collection_name = None
+                                    confidence = 0.0
+                                    print(f"✅ Using original: {user_input}")
+                                    break
+                                else:
+                                    print("Invalid selection. Please try again.")
+                            else:
+                                print("Please enter a number or press Enter.")
+                        except ValueError:
+                            print("Please enter a valid number.")
+                    break
+                else:
+                    # No suggestions found
+                    normalized_slug = predictor.normalize_input(user_input)
+                    collection_name = None
+                    print(f"🔄 No similar collections found. Analyzing: {user_input}")
+            else:
+                # No match at all
+                normalized_slug = predictor.normalize_input(user_input)
+                collection_name = None
+                print(f"🔄 Analyzing: {normalized_slug}")
+        
+        if not normalized_slug:
+            print("❌ Could not process input. Please try again.")
+            continue
+        
+        # Proceed with prediction
+        result = predictor.predict_collection(normalized_slug)
         
         print("\n" + "=" * 50)
         print("AUTHENTICITY ANALYSIS REPORT")
@@ -231,6 +546,10 @@ def main():
         
         if 'error' in result:
             print(f"❌ Error: {result['error']}")
+            print("\n💡 Troubleshooting:")
+            print("   • Check if the collection exists on OpenSea")
+            print("   • Try the exact collection name or OpenSea URL")
+            print("   • Check your internet connection")
         else:
             prediction = result['prediction']
             emoji = "✅" if prediction == "Legitimate" else "⚠️"
@@ -245,8 +564,13 @@ def main():
             elif risk_score > 30:
                 risk_level = "Medium"
             
+            # Display collection info
+            display_name = collection_name if collection_name else result['collection']
+            
             # Header information
-            print(f"{emoji} Collection: {result['collection']}")
+            print(f"{emoji} Collection: {display_name}")
+            print(f"🔗 Slug: {result['collection']}")
+            print(f"🌐 OpenSea: https://opensea.io/collection/{result['collection']}")
             print(f"📊 Prediction: {prediction}")
             print(f"🎯 Confidence: {result['confidence']['legitimate']*100:.1f}% legitimate")
             print(f"⚠️ Risk Score: {risk_score:.1f}% ({risk_level} Risk)")
@@ -277,7 +601,7 @@ def main():
             print(f"     - Discord: {'Present ✓' if features['has_discord'] else 'Missing ✗'}")
             print(f"     - Twitter: {'Present ✓' if features['has_twitter'] else 'Missing ✗'}")
             print(f"   • Reddit Mentions: {features['reddit_mentions']}")
-            print(f"   • Reddit Sentiment: {features['reddit_sentiment']:.2f} (0-1 scale, higher is more positive)")
+            print(f"   • Reddit Sentiment: {features['reddit_sentiment']:.2f} (0-1 scale)")
             
             # Risk assessment
             print("\n⚠️ RISK ASSESSMENT:")
@@ -285,44 +609,43 @@ def main():
             # Market risk based on liquidity
             liquidity = (features['total_volume'] * features['num_owners']) ** 0.5
             if liquidity < 10:
-                print(f"   • Low Liquidity Risk: HIGH - Limited trading activity detected")
+                print(f"   • Liquidity Risk: HIGH - Limited trading activity")
             else:
-                print(f"   • Low Liquidity Risk: LOW - Healthy trading volume and ownership distribution")
+                print(f"   • Liquidity Risk: LOW - Healthy trading volume")
             
             # Ownership concentration risk
             ownership_concentration = 1 - (features['num_owners'] / max(features['total_supply'], 1))
             if ownership_concentration > 0.8:
-                print(f"   • Ownership Concentration: HIGH - Few wallets hold most tokens ({ownership_concentration*100:.1f}%)")
+                print(f"   • Ownership Concentration: HIGH ({ownership_concentration*100:.1f}%)")
             elif ownership_concentration > 0.5:
-                print(f"   • Ownership Concentration: MEDIUM - Moderately concentrated ownership ({ownership_concentration*100:.1f}%)")
+                print(f"   • Ownership Concentration: MEDIUM ({ownership_concentration*100:.1f}%)")
             else:
-                print(f"   • Ownership Concentration: LOW - Well distributed ownership ({ownership_concentration*100:.1f}%)")
+                print(f"   • Ownership Concentration: LOW ({ownership_concentration*100:.1f}%)")
             
             # Price risk
             if price_premium > 2:
-                print(f"   • Price Premium Risk: HIGH - Average price significantly above floor ({price_premium:.2f}x)")
+                print(f"   • Price Premium Risk: HIGH ({price_premium:.2f}x floor)")
             elif price_premium > 1.5:
-                print(f"   • Price Premium Risk: MEDIUM - Average price moderately above floor ({price_premium:.2f}x)")
+                print(f"   • Price Premium Risk: MEDIUM ({price_premium:.2f}x floor)")
             else:
-                print(f"   • Price Premium Risk: LOW - Average price close to floor ({price_premium:.2f}x)")
+                print(f"   • Price Premium Risk: LOW ({price_premium:.2f}x floor)")
             
             # Social media risk
             social_risk = "HIGH" if not (features['has_discord'] or features['has_twitter']) else \
                           "MEDIUM" if not (features['has_discord'] and features['has_twitter']) else "LOW"
-            print(f"   • Social Media Risk: {social_risk} - {'Limited' if social_risk != 'LOW' else 'Strong'} community presence")
+            print(f"   • Social Media Risk: {social_risk}")
             
             print("\n🔮 PREDICTION CONFIDENCE:")
             if result['confidence']['legitimate'] > 0.9:
-                print("   Very high confidence in prediction - strong indicators of legitimacy")
+                print("   Very high confidence - strong legitimacy indicators")
             elif result['confidence']['legitimate'] > 0.7:
-                print("   High confidence in prediction - multiple positive indicators")
+                print("   High confidence - multiple positive indicators")
             elif result['confidence']['legitimate'] > 0.5:
-                print("   Moderate confidence in prediction - mixed indicators")
+                print("   Moderate confidence - mixed indicators")
             else:
-                print("   Low confidence in prediction - exercise caution")
+                print("   Low confidence - exercise caution")
                 
-            print("\n⚠️ DISCLAIMER: This analysis is for informational purposes only and should not be")
-            print("   considered financial advice. Always conduct your own research before investing.")
+            print("\n⚠️ DISCLAIMER: For informational purposes only. Not financial advice.")
 
 if __name__ == "__main__":
     main()
