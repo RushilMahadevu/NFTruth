@@ -226,7 +226,7 @@ def main():
         result = predictor.predict_collection(collection_slug)
         
         print("\n" + "=" * 50)
-        print("AUTHENTICITY ANALYSIS RESULT")
+        print("AUTHENTICITY ANALYSIS REPORT")
         print("=" * 50)
         
         if 'error' in result:
@@ -234,19 +234,95 @@ def main():
         else:
             prediction = result['prediction']
             emoji = "✅" if prediction == "Legitimate" else "⚠️"
+            risk_score = result['risk_score']*100
             
+            # Determine risk level category
+            risk_level = "Low"
+            if risk_score > 70:
+                risk_level = "Very High"
+            elif risk_score > 50:
+                risk_level = "High"
+            elif risk_score > 30:
+                risk_level = "Medium"
+            
+            # Header information
             print(f"{emoji} Collection: {result['collection']}")
             print(f"📊 Prediction: {prediction}")
             print(f"🎯 Confidence: {result['confidence']['legitimate']*100:.1f}% legitimate")
-            print(f"⚠️ Risk Score: {result['risk_score']*100:.1f}%")
+            print(f"⚠️ Risk Score: {risk_score:.1f}% ({risk_level} Risk)")
             
-            print("\n📈 Key Features:")
+            # Core metrics
+            print("\n📈 KEY METRICS:")
             features = result['features_analyzed']
-            print(f"   Floor Price: {features['floor_price']} ETH")
-            print(f"   Total Volume: {features['total_volume']:,.0f} ETH")
-            print(f"   Owners: {features['num_owners']:,}")
-            print(f"   Verified: {'Yes' if features['is_verified'] else 'No'}")
-            print(f"   Social Media: Discord: {'Yes' if features['has_discord'] else 'No'}, Twitter: {'Yes' if features['has_twitter'] else 'No'}")
+            print(f"   • Floor Price: {features['floor_price']} ETH")
+            print(f"   • Total Volume: {features['total_volume']:,.0f} ETH")
+            print(f"   • Owners: {features['num_owners']:,}")
+            print(f"   • Market Cap: {features['market_cap']:,.0f} ETH")
+            print(f"   • Average Price: {features['average_price']:.3f} ETH")
+            
+            # Trading metrics
+            volume_per_owner = features['total_volume'] / max(features['num_owners'], 1)
+            mc_volume_ratio = features['market_cap'] / max(features['total_volume'], 0.001)
+            price_premium = features['average_price'] / max(features['floor_price'], 0.001)
+            
+            print("\n📊 TRADING ANALYSIS:")
+            print(f"   • Volume per Owner: {volume_per_owner:.3f} ETH")
+            print(f"   • Market Cap to Volume Ratio: {mc_volume_ratio:.2f}")
+            print(f"   • Price Premium Ratio: {price_premium:.2f}")
+            
+            # Social and verification metrics
+            print("\n🔍 TRUST INDICATORS:")
+            print(f"   • Verified Collection: {'Yes ✓' if features['is_verified'] else 'No ✗'}")
+            print(f"   • Social Media Presence:")
+            print(f"     - Discord: {'Present ✓' if features['has_discord'] else 'Missing ✗'}")
+            print(f"     - Twitter: {'Present ✓' if features['has_twitter'] else 'Missing ✗'}")
+            print(f"   • Reddit Mentions: {features['reddit_mentions']}")
+            print(f"   • Reddit Sentiment: {features['reddit_sentiment']:.2f} (0-1 scale, higher is more positive)")
+            
+            # Risk assessment
+            print("\n⚠️ RISK ASSESSMENT:")
+            
+            # Market risk based on liquidity
+            liquidity = (features['total_volume'] * features['num_owners']) ** 0.5
+            if liquidity < 10:
+                print(f"   • Low Liquidity Risk: HIGH - Limited trading activity detected")
+            else:
+                print(f"   • Low Liquidity Risk: LOW - Healthy trading volume and ownership distribution")
+            
+            # Ownership concentration risk
+            ownership_concentration = 1 - (features['num_owners'] / max(features['total_supply'], 1))
+            if ownership_concentration > 0.8:
+                print(f"   • Ownership Concentration: HIGH - Few wallets hold most tokens ({ownership_concentration*100:.1f}%)")
+            elif ownership_concentration > 0.5:
+                print(f"   • Ownership Concentration: MEDIUM - Moderately concentrated ownership ({ownership_concentration*100:.1f}%)")
+            else:
+                print(f"   • Ownership Concentration: LOW - Well distributed ownership ({ownership_concentration*100:.1f}%)")
+            
+            # Price risk
+            if price_premium > 2:
+                print(f"   • Price Premium Risk: HIGH - Average price significantly above floor ({price_premium:.2f}x)")
+            elif price_premium > 1.5:
+                print(f"   • Price Premium Risk: MEDIUM - Average price moderately above floor ({price_premium:.2f}x)")
+            else:
+                print(f"   • Price Premium Risk: LOW - Average price close to floor ({price_premium:.2f}x)")
+            
+            # Social media risk
+            social_risk = "HIGH" if not (features['has_discord'] or features['has_twitter']) else \
+                          "MEDIUM" if not (features['has_discord'] and features['has_twitter']) else "LOW"
+            print(f"   • Social Media Risk: {social_risk} - {'Limited' if social_risk != 'LOW' else 'Strong'} community presence")
+            
+            print("\n🔮 PREDICTION CONFIDENCE:")
+            if result['confidence']['legitimate'] > 0.9:
+                print("   Very high confidence in prediction - strong indicators of legitimacy")
+            elif result['confidence']['legitimate'] > 0.7:
+                print("   High confidence in prediction - multiple positive indicators")
+            elif result['confidence']['legitimate'] > 0.5:
+                print("   Moderate confidence in prediction - mixed indicators")
+            else:
+                print("   Low confidence in prediction - exercise caution")
+                
+            print("\n⚠️ DISCLAIMER: This analysis is for informational purposes only and should not be")
+            print("   considered financial advice. Always conduct your own research before investing.")
 
 if __name__ == "__main__":
     main()
