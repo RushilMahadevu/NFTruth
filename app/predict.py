@@ -384,14 +384,13 @@ def main():
     """Test the predictor"""
     predictor = NFTPredictor()
     
-    print("\n🤖 NFT Authenticity Predictor")
+    print("\n🤖 NFT Authenticity Predictor 🤖")
     print("=" * 40)
     print("\n💡 Enter collection name, slug, or OpenSea URL")
-    print("Examples: 'CryptoPunks', 'bored-ape-yacht-club', 'https://opensea.io/collection/azuki'")
-    print("Type 'help' for examples or 'quit' to exit")
+    print("\nExamples: 🧠 'CryptoPunks' | 😍 'bored-ape-yacht-club' | 🔗 'https://opensea.io/collection/azuki'")
     
     while True:
-        user_input = input("\nEnter NFT collection (or 'quit' to exit): ").strip()
+        user_input = input("\n👋 What's the NFT collection? (type 'help' or 'quit' anytime): ").strip()
         
         if user_input.lower() == 'quit':
             break
@@ -435,10 +434,10 @@ def main():
                 print(f"✅ Found: {collection_name} ({normalized_slug})")
             elif confidence >= 0.6:
                 # Close match found - ask for confirmation
-                print(f"🔍 Did you mean '{collection_name}' ({normalized_slug})? ({confidence*100:.0f}% match)")
+                print(f"\n🔍 Did you mean '{collection_name}' ({normalized_slug})? 🤔 ({confidence*100:.0f}% match)")
                 
                 while True:
-                    choice = input("Enter 'y' for yes, 'n' for no, or 's' to see more suggestions: ").strip().lower()
+                    choice = input("👍 y = yes | 👎 n = no | 💡 s = suggestions: ").strip().lower()
                     
                     if choice in ['y', 'yes']:
                         print(f"✅ Using: {collection_name}")
@@ -452,10 +451,10 @@ def main():
                     elif choice in ['s', 'suggestions']:
                         suggestions = predictor.get_suggestions(user_input, num_suggestions=5)
                         if suggestions:
-                            print("\n🔍 Similar collections found:")
+                            print("\n🔍 Similar collections found 🧩:")
                             for i, (slug, name, conf) in enumerate(suggestions, 1):
                                 print(f"   {i}. {name} ({slug}) - {conf*100:.0f}% match")
-                            print(f"   {len(suggestions)+1}. Use original input: '{user_input}'")
+                            print(f"   {len(suggestions)+1}. 📝 Use original input: '{user_input}'")
                             
                             try:
                                 selection = input(f"\nSelect 1-{len(suggestions)+1}: ").strip()
@@ -491,8 +490,8 @@ def main():
                 if suggestions:
                     print(f"🔍 '{user_input}' not found. Did you mean one of these?")
                     for i, (slug, name, conf) in enumerate(suggestions, 1):
-                        print(f"   {i}. {name} ({slug}) - {conf*100:.0f}% match")
-                    print(f"   {len(suggestions)+1}. Use original input: '{user_input}'")
+                        print(f"   {i}. {name} ({slug}) - 📈 {conf*100:.0f}% match")
+                    print(f"   {len(suggestions)+1}. 📝 Use original input: '{user_input}'")
                     
                     while True:
                         try:
@@ -541,7 +540,7 @@ def main():
         result = predictor.predict_collection(normalized_slug)
         
         print("\n" + "=" * 50)
-        print("AUTHENTICITY ANALYSIS REPORT")
+        print("🎉 Mission complete! Here's your authenticity report: 🚀")
         print("=" * 50)
         
         if 'error' in result:
@@ -552,7 +551,7 @@ def main():
             print("   • Check your internet connection")
         else:
             prediction = result['prediction']
-            emoji = "✅" if prediction == "Legitimate" else "⚠️"
+            emoji = "🟢" if prediction == "Legitimate" else "🔴"
             risk_score = result['risk_score']*100
             
             # Determine risk level category
@@ -596,7 +595,7 @@ def main():
             
             # Social and verification metrics
             print("\n🔍 TRUST INDICATORS:")
-            print(f"   • Verified Collection: {'Yes ✓' if features['is_verified'] else 'No ✗'}")
+            print(f"   • Verified Collection: {'Yes ✓ 🛡️ OpenSea Certified!' if features['is_verified'] else 'No ✗ 🤨 Proceed with caution.'}")
             print(f"   • Social Media Presence:")
             print(f"     - Discord: {'Present ✓' if features['has_discord'] else 'Missing ✗'}")
             print(f"     - Twitter: {'Present ✓' if features['has_twitter'] else 'Missing ✗'}")
