@@ -1,0 +1,2284 @@
+{
+  "data": [
+    {
+      "features": {
+        "total_supply": 16398,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 2.323096125145653,
+        "market_cap": 1212.2475374155815,
+        "total_volume": 631.1652430895667,
+        "num_owners": 7480,
+        "average_price": 2.5064678226831485,
+        "reddit_mentions": 11,
+        "reddit_sentiment": 0.9915827728336288,
+        "reddit_engagement": 95
+      },
+      "collection_slug": "legit_collection_6527"
+    },
+    {
+      "features": {
+        "total_supply": 3969,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.6642265219649145,
+        "market_cap": 7.3747899815865985,
+        "total_volume": 14.694332695286349,
+        "num_owners": 363,
+        "average_price": 0.33531974504341167,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.0661600455070732,
+        "reddit_engagement": 11
+      },
+      "collection_slug": "suspicious_collection_3390"
+    },
+    {
+      "features": {
+        "total_supply": 1488,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 5.850202443871634,
+        "market_cap": 683.060873318862,
+        "total_volume": 536.728634632771,
+        "num_owners": 13880,
+        "average_price": 13.797118257517088,
+        "reddit_mentions": 8,
+        "reddit_sentiment": 0.24425089858852872,
+        "reddit_engagement": 108
+      },
+      "collection_slug": "legit_collection_3553"
+    },
+    {
+      "features": {
+        "total_supply": 5018,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.4904175880066257,
+        "market_cap": 86271.8646762406,
+        "total_volume": 52079.58731884959,
+        "num_owners": 7443,
+        "average_price": 3.0542165138835173,
+        "reddit_mentions": 8,
+        "reddit_sentiment": 0.4118110209760157,
+        "reddit_engagement": 101
+      },
+      "collection_slug": "legit_collection_7667"
+    },
+    {
+      "features": {
+        "total_supply": 8686,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.2806295321583199,
+        "market_cap": 3975.5452980761256,
+        "total_volume": 6566.008231837138,
+        "num_owners": 440,
+        "average_price": 0.3304539666667425,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.09197153586967156,
+        "reddit_engagement": 9
+      },
+      "collection_slug": "suspicious_collection_6971"
+    },
+    {
+      "features": {
+        "total_supply": 2679,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 1.076609882745847,
+        "market_cap": 36310.93883312508,
+        "total_volume": 36024.42991048924,
+        "num_owners": 17396,
+        "average_price": 2.147138018091232,
+        "reddit_mentions": 7,
+        "reddit_sentiment": 0.35644091328933686,
+        "reddit_engagement": 107
+      },
+      "collection_slug": "legit_collection_2141"
+    },
+    {
+      "features": {
+        "total_supply": 4083,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.6655617166153986,
+        "market_cap": 751.382212065685,
+        "total_volume": 468.6226442391832,
+        "num_owners": 19701,
+        "average_price": 1.1846662673272887,
+        "reddit_mentions": 8,
+        "reddit_sentiment": 0.7222545665815098,
+        "reddit_engagement": 98
+      },
+      "collection_slug": "legit_collection_4443"
+    },
+    {
+      "features": {
+        "total_supply": 16504,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 2.9347655272882114,
+        "market_cap": 3553.6478215747234,
+        "total_volume": 3572.014141003321,
+        "num_owners": 10056,
+        "average_price": 3.091869197784046,
+        "reddit_mentions": 12,
+        "reddit_sentiment": 0.6254483730282459,
+        "reddit_engagement": 121
+      },
+      "collection_slug": "legit_collection_3072"
+    },
+    {
+      "features": {
+        "total_supply": 9792,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.806221029112636,
+        "market_cap": 5495.207241118033,
+        "total_volume": 4776.0589544504355,
+        "num_owners": 689,
+        "average_price": 0.8422086181019581,
+        "reddit_mentions": 11,
+        "reddit_sentiment": 0.6223012266119727,
+        "reddit_engagement": 99
+      },
+      "collection_slug": "legit_collection_5486"
+    },
+    {
+      "features": {
+        "total_supply": 8629,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 8.487643748725606,
+        "market_cap": 57467.236169562784,
+        "total_volume": 31929.188775961557,
+        "num_owners": 8726,
+        "average_price": 27.628681589970586,
+        "reddit_mentions": 7,
+        "reddit_sentiment": 0.9767237749178306,
+        "reddit_engagement": 103
+      },
+      "collection_slug": "legit_collection_9268"
+    },
+    {
+      "features": {
+        "total_supply": 8974,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 7.538934592374864,
+        "market_cap": 36.296090381297894,
+        "total_volume": 67.00739568277035,
+        "num_owners": 91,
+        "average_price": 11.86994005057681,
+        "reddit_mentions": 0,
+        "reddit_sentiment": 0.1448359209971554,
+        "reddit_engagement": 12
+      },
+      "collection_slug": "suspicious_collection_7504"
+    },
+    {
+      "features": {
+        "total_supply": 18879,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 1.1706232360227606,
+        "market_cap": 1957.5555267807506,
+        "total_volume": 1823.488639365276,
+        "num_owners": 7276,
+        "average_price": 3.5219837382944017,
+        "reddit_mentions": 14,
+        "reddit_sentiment": 0.13945297798149414,
+        "reddit_engagement": 95
+      },
+      "collection_slug": "legit_collection_7554"
+    },
+    {
+      "features": {
+        "total_supply": 2524,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 7.310403465730477,
+        "market_cap": 4119.176272690227,
+        "total_volume": 2472.7330799318115,
+        "num_owners": 18217,
+        "average_price": 15.244648149850835,
+        "reddit_mentions": 12,
+        "reddit_sentiment": 0.5843846703579375,
+        "reddit_engagement": 95
+      },
+      "collection_slug": "legit_collection_7970"
+    },
+    {
+      "features": {
+        "total_supply": 4568,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.28630930381278485,
+        "market_cap": 104.69369612333718,
+        "total_volume": 83.4184848532676,
+        "num_owners": 153,
+        "average_price": 0.5633410175249751,
+        "reddit_mentions": 2,
+        "reddit_sentiment": 0.3243113421730199,
+        "reddit_engagement": 10
+      },
+      "collection_slug": "suspicious_collection_3754"
+    },
+    {
+      "features": {
+        "total_supply": 10692,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.9686215388090818,
+        "market_cap": 511.5961069661348,
+        "total_volume": 566.9159956250594,
+        "num_owners": 10416,
+        "average_price": 2.5553687018687374,
+        "reddit_mentions": 8,
+        "reddit_sentiment": 0.9256931393344209,
+        "reddit_engagement": 99
+      },
+      "collection_slug": "legit_collection_6645"
+    },
+    {
+      "features": {
+        "total_supply": 10076,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.7522446348663521,
+        "market_cap": 16100.390696557084,
+        "total_volume": 8299.36972940995,
+        "num_owners": 12760,
+        "average_price": 0.7833948642191163,
+        "reddit_mentions": 9,
+        "reddit_sentiment": 0.5569285314035507,
+        "reddit_engagement": 121
+      },
+      "collection_slug": "legit_collection_6402"
+    },
+    {
+      "features": {
+        "total_supply": 785,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.7725130497147026,
+        "market_cap": 29.019220221456344,
+        "total_volume": 45.83345052074919,
+        "num_owners": 196,
+        "average_price": 1.2980962269777083,
+        "reddit_mentions": 0,
+        "reddit_sentiment": 0.08334204054128876,
+        "reddit_engagement": 10
+      },
+      "collection_slug": "suspicious_collection_7083"
+    },
+    {
+      "features": {
+        "total_supply": 18824,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 6.460841216195863,
+        "market_cap": 10226.835579427487,
+        "total_volume": 7731.787821321881,
+        "num_owners": 5950,
+        "average_price": 11.722001648550837,
+        "reddit_mentions": 8,
+        "reddit_sentiment": 0.9622767177900502,
+        "reddit_engagement": 96
+      },
+      "collection_slug": "legit_collection_7117"
+    },
+    {
+      "features": {
+        "total_supply": 3421,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 4.9514731785661725,
+        "market_cap": 10825.943686188853,
+        "total_volume": 6626.901735357827,
+        "num_owners": 19206,
+        "average_price": 8.16701285825282,
+        "reddit_mentions": 13,
+        "reddit_sentiment": 0.5498368950491932,
+        "reddit_engagement": 104
+      },
+      "collection_slug": "legit_collection_8680"
+    },
+    {
+      "features": {
+        "total_supply": 5027,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.5802306768730087,
+        "market_cap": 10.244756792477952,
+        "total_volume": 6.923785717486861,
+        "num_owners": 263,
+        "average_price": 0.3129155393216117,
+        "reddit_mentions": 0,
+        "reddit_sentiment": 0.14200525305157616,
+        "reddit_engagement": 16
+      },
+      "collection_slug": "suspicious_collection_6404"
+    },
+    {
+      "features": {
+        "total_supply": 2464,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.13557529341440192,
+        "market_cap": 278.58609366578145,
+        "total_volume": 202.30048589817622,
+        "num_owners": 16,
+        "average_price": 0.26496992480365367,
+        "reddit_mentions": 2,
+        "reddit_sentiment": 0.14903456352198982,
+        "reddit_engagement": 10
+      },
+      "collection_slug": "suspicious_collection_3802"
+    },
+    {
+      "features": {
+        "total_supply": 5799,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 2.4245485961282722,
+        "market_cap": 7063.321578745431,
+        "total_volume": 4530.249474777533,
+        "num_owners": 5584,
+        "average_price": 7.1033912002820285,
+        "reddit_mentions": 17,
+        "reddit_sentiment": 0.6140887629408087,
+        "reddit_engagement": 82
+      },
+      "collection_slug": "legit_collection_8220"
+    },
+    {
+      "features": {
+        "total_supply": 2115,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.36044919852718343,
+        "market_cap": 408.06215372300045,
+        "total_volume": 485.9170048513613,
+        "num_owners": 281,
+        "average_price": 0.26927700889410083,
+        "reddit_mentions": 0,
+        "reddit_sentiment": 0.17158579137745578,
+        "reddit_engagement": 7
+      },
+      "collection_slug": "suspicious_collection_9259"
+    },
+    {
+      "features": {
+        "total_supply": 2565,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 1.9062350909459882,
+        "market_cap": 1097.8431445431675,
+        "total_volume": 916.583086621091,
+        "num_owners": 49,
+        "average_price": 3.6841287315263833,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.4309042084945902,
+        "reddit_engagement": 3
+      },
+      "collection_slug": "suspicious_collection_3701"
+    },
+    {
+      "features": {
+        "total_supply": 9711,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 7.984213235553409,
+        "market_cap": 2352.7710493765144,
+        "total_volume": 2186.700897196042,
+        "num_owners": 2480,
+        "average_price": 10.706587928064327,
+        "reddit_mentions": 14,
+        "reddit_sentiment": 0.14990457588754955,
+        "reddit_engagement": 90
+      },
+      "collection_slug": "legit_collection_8884"
+    },
+    {
+      "features": {
+        "total_supply": 1293,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 1.9617816786391018,
+        "market_cap": 24.898400653906947,
+        "total_volume": 20.61670424502347,
+        "num_owners": 419,
+        "average_price": 3.4089801787855025,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.46697489328813274,
+        "reddit_engagement": 8
+      },
+      "collection_slug": "suspicious_collection_3471"
+    },
+    {
+      "features": {
+        "total_supply": 6941,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.6338534781230964,
+        "market_cap": 1266.2744109242828,
+        "total_volume": 1130.8060288152828,
+        "num_owners": 4763,
+        "average_price": 2.413157119441281,
+        "reddit_mentions": 11,
+        "reddit_sentiment": 0.77696490887204,
+        "reddit_engagement": 98
+      },
+      "collection_slug": "legit_collection_5415"
+    },
+    {
+      "features": {
+        "total_supply": 295,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.6586018972435346,
+        "market_cap": 28.290316845684462,
+        "total_volume": 19.208834638331815,
+        "num_owners": 391,
+        "average_price": 1.0741420588590505,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.5601211200346969,
+        "reddit_engagement": 10
+      },
+      "collection_slug": "suspicious_collection_40"
+    },
+    {
+      "features": {
+        "total_supply": 2206,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.6389757904229862,
+        "market_cap": 19.732979220831254,
+        "total_volume": 17.545673005958545,
+        "num_owners": 454,
+        "average_price": 2.460144614402352,
+        "reddit_mentions": 0,
+        "reddit_sentiment": 0.23878068146055884,
+        "reddit_engagement": 10
+      },
+      "collection_slug": "suspicious_collection_3983"
+    },
+    {
+      "features": {
+        "total_supply": 1206,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 2.1961843198330833,
+        "market_cap": 1917.0890400300377,
+        "total_volume": 1610.7014349312558,
+        "num_owners": 19615,
+        "average_price": 5.53747050413989,
+        "reddit_mentions": 15,
+        "reddit_sentiment": 0.846362989041377,
+        "reddit_engagement": 108
+      },
+      "collection_slug": "legit_collection_8755"
+    },
+    {
+      "features": {
+        "total_supply": 10374,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 4.551886957650499,
+        "market_cap": 4138.48141106147,
+        "total_volume": 4070.5423730290913,
+        "num_owners": 17274,
+        "average_price": 4.058708860531728,
+        "reddit_mentions": 12,
+        "reddit_sentiment": 0.5571773184195282,
+        "reddit_engagement": 95
+      },
+      "collection_slug": "legit_collection_4278"
+    },
+    {
+      "features": {
+        "total_supply": 4911,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 8.905412916872994,
+        "market_cap": 7897.952019856656,
+        "total_volume": 7592.868344357929,
+        "num_owners": 9578,
+        "average_price": 23.24349049780405,
+        "reddit_mentions": 17,
+        "reddit_sentiment": 0.5577285150760126,
+        "reddit_engagement": 94
+      },
+      "collection_slug": "legit_collection_207"
+    },
+    {
+      "features": {
+        "total_supply": 9624,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.4482804256701265,
+        "market_cap": 15.543839586140866,
+        "total_volume": 16.366418350981572,
+        "num_owners": 209,
+        "average_price": 1.3066509540791142,
+        "reddit_mentions": 0,
+        "reddit_sentiment": 0.2642542735128871,
+        "reddit_engagement": 13
+      },
+      "collection_slug": "suspicious_collection_1449"
+    },
+    {
+      "features": {
+        "total_supply": 7728,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.30213375852526614,
+        "market_cap": 35.5471850384695,
+        "total_volume": 61.26923398890355,
+        "num_owners": 147,
+        "average_price": 0.4908997239509833,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.4159449207204636,
+        "reddit_engagement": 6
+      },
+      "collection_slug": "suspicious_collection_6031"
+    },
+    {
+      "features": {
+        "total_supply": 18327,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 8.630900357262345,
+        "market_cap": 5669.087595260975,
+        "total_volume": 3861.6029352235714,
+        "num_owners": 14075,
+        "average_price": 9.222045917001779,
+        "reddit_mentions": 7,
+        "reddit_sentiment": 0.6773695919574437,
+        "reddit_engagement": 90
+      },
+      "collection_slug": "legit_collection_9106"
+    },
+    {
+      "features": {
+        "total_supply": 3760,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.23614438499128315,
+        "market_cap": 82.87246432381967,
+        "total_volume": 68.61239958492007,
+        "num_owners": 21,
+        "average_price": 0.33517158981734685,
+        "reddit_mentions": 0,
+        "reddit_sentiment": 0.15618252983335593,
+        "reddit_engagement": 7
+      },
+      "collection_slug": "suspicious_collection_1727"
+    },
+    {
+      "features": {
+        "total_supply": 795,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.30992283451668173,
+        "market_cap": 61.47759657265856,
+        "total_volume": 43.122886359580676,
+        "num_owners": 479,
+        "average_price": 0.22935449011137837,
+        "reddit_mentions": 0,
+        "reddit_sentiment": 0.12745873095690802,
+        "reddit_engagement": 8
+      },
+      "collection_slug": "suspicious_collection_3807"
+    },
+    {
+      "features": {
+        "total_supply": 2336,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 2.6529509885439038,
+        "market_cap": 43.87345652714447,
+        "total_volume": 45.73652484884455,
+        "num_owners": 217,
+        "average_price": 2.3385311213351407,
+        "reddit_mentions": 3,
+        "reddit_sentiment": 0.09063775401700648,
+        "reddit_engagement": 7
+      },
+      "collection_slug": "suspicious_collection_9122"
+    },
+    {
+      "features": {
+        "total_supply": 11568,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.6928303781627665,
+        "market_cap": 6135.142099476083,
+        "total_volume": 4454.250102406826,
+        "num_owners": 18910,
+        "average_price": 1.6652069804071017,
+        "reddit_mentions": 9,
+        "reddit_sentiment": 0.6033591966230792,
+        "reddit_engagement": 84
+      },
+      "collection_slug": "legit_collection_7984"
+    },
+    {
+      "features": {
+        "total_supply": 5837,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.1621283988187445,
+        "market_cap": 101.73862595541607,
+        "total_volume": 98.26874369776688,
+        "num_owners": 69,
+        "average_price": 0.1597371009757154,
+        "reddit_mentions": 2,
+        "reddit_sentiment": 0.11952902107940358,
+        "reddit_engagement": 8
+      },
+      "collection_slug": "suspicious_collection_3493"
+    },
+    {
+      "features": {
+        "total_supply": 7355,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.7641735963946459,
+        "market_cap": 141.22314278887086,
+        "total_volume": 125.59582605677157,
+        "num_owners": 169,
+        "average_price": 1.5069087883626477,
+        "reddit_mentions": 0,
+        "reddit_sentiment": 0.08211161408912511,
+        "reddit_engagement": 8
+      },
+      "collection_slug": "suspicious_collection_9879"
+    },
+    {
+      "features": {
+        "total_supply": 6798,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.07527753925746193,
+        "market_cap": 62.90144703696131,
+        "total_volume": 51.34034362242988,
+        "num_owners": 166,
+        "average_price": 0.05637778384712563,
+        "reddit_mentions": 2,
+        "reddit_sentiment": 0.34785958996640465,
+        "reddit_engagement": 15
+      },
+      "collection_slug": "suspicious_collection_7544"
+    },
+    {
+      "features": {
+        "total_supply": 350,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.8133749396116011,
+        "market_cap": 1.6772103561107006,
+        "total_volume": 2.5639731946314916,
+        "num_owners": 309,
+        "average_price": 1.0560748756899783,
+        "reddit_mentions": 0,
+        "reddit_sentiment": 0.5108587316509681,
+        "reddit_engagement": 12
+      },
+      "collection_slug": "suspicious_collection_1627"
+    },
+    {
+      "features": {
+        "total_supply": 11380,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 7.717782671985599,
+        "market_cap": 37187.02652464307,
+        "total_volume": 22775.866971456297,
+        "num_owners": 1293,
+        "average_price": 11.421218254455255,
+        "reddit_mentions": 8,
+        "reddit_sentiment": 0.5599920631824868,
+        "reddit_engagement": 122
+      },
+      "collection_slug": "legit_collection_7147"
+    },
+    {
+      "features": {
+        "total_supply": 6498,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.7879162357904816,
+        "market_cap": 55.20724667179819,
+        "total_volume": 59.20361638855459,
+        "num_owners": 145,
+        "average_price": 1.500723380038521,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.34594876492763116,
+        "reddit_engagement": 11
+      },
+      "collection_slug": "suspicious_collection_5448"
+    },
+    {
+      "features": {
+        "total_supply": 2742,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.4198329947235621,
+        "market_cap": 2416.274867802731,
+        "total_volume": 1568.4250759881845,
+        "num_owners": 11052,
+        "average_price": 0.5252165977625114,
+        "reddit_mentions": 6,
+        "reddit_sentiment": 0.5853623656439442,
+        "reddit_engagement": 110
+      },
+      "collection_slug": "legit_collection_9508"
+    },
+    {
+      "features": {
+        "total_supply": 13236,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 6.979380717248657,
+        "market_cap": 9795.388087181344,
+        "total_volume": 5643.085913682977,
+        "num_owners": 17662,
+        "average_price": 14.63833506372626,
+        "reddit_mentions": 5,
+        "reddit_sentiment": 0.8854042796077105,
+        "reddit_engagement": 100
+      },
+      "collection_slug": "legit_collection_89"
+    },
+    {
+      "features": {
+        "total_supply": 1140,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.5918002749114462,
+        "market_cap": 896.8620885163767,
+        "total_volume": 945.2064974964266,
+        "num_owners": 315,
+        "average_price": 0.8082807149282671,
+        "reddit_mentions": 0,
+        "reddit_sentiment": 0.5060225011993001,
+        "reddit_engagement": 11
+      },
+      "collection_slug": "suspicious_collection_3259"
+    },
+    {
+      "features": {
+        "total_supply": 18214,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 8.668280142955988,
+        "market_cap": 1559.5037433788984,
+        "total_volume": 1385.177125745862,
+        "num_owners": 16479,
+        "average_price": 21.512974799866058,
+        "reddit_mentions": 5,
+        "reddit_sentiment": 0.6608729704936422,
+        "reddit_engagement": 95
+      },
+      "collection_slug": "legit_collection_1150"
+    },
+    {
+      "features": {
+        "total_supply": 17173,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 1.1903169138011385,
+        "market_cap": 109796.18763877197,
+        "total_volume": 87435.24209637025,
+        "num_owners": 6971,
+        "average_price": 2.620507467973978,
+        "reddit_mentions": 10,
+        "reddit_sentiment": 0.8744057653188858,
+        "reddit_engagement": 101
+      },
+      "collection_slug": "legit_collection_5243"
+    },
+    {
+      "features": {
+        "total_supply": 7359,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 5.0090873839085,
+        "market_cap": 27882.099204088026,
+        "total_volume": 19360.50766490544,
+        "num_owners": 9946,
+        "average_price": 11.758869164974195,
+        "reddit_mentions": 6,
+        "reddit_sentiment": 0.3647440142417601,
+        "reddit_engagement": 101
+      },
+      "collection_slug": "legit_collection_3756"
+    },
+    {
+      "features": {
+        "total_supply": 7368,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.22846784555179805,
+        "market_cap": 9.986817035719326,
+        "total_volume": 19.82230527565678,
+        "num_owners": 51,
+        "average_price": 0.17416610054378937,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.1441210919449387,
+        "reddit_engagement": 10
+      },
+      "collection_slug": "suspicious_collection_7568"
+    },
+    {
+      "features": {
+        "total_supply": 8468,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.5984573354528469,
+        "market_cap": 22.57505912526056,
+        "total_volume": 31.91682704945621,
+        "num_owners": 277,
+        "average_price": 0.9586489875570141,
+        "reddit_mentions": 0,
+        "reddit_sentiment": 0.6087593592201985,
+        "reddit_engagement": 6
+      },
+      "collection_slug": "suspicious_collection_7684"
+    },
+    {
+      "features": {
+        "total_supply": 11756,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 6.051925489443159,
+        "market_cap": 469.92076393006084,
+        "total_volume": 291.6933547875643,
+        "num_owners": 12043,
+        "average_price": 6.939528608779709,
+        "reddit_mentions": 11,
+        "reddit_sentiment": 0.6914027977840678,
+        "reddit_engagement": 100
+      },
+      "collection_slug": "legit_collection_7979"
+    },
+    {
+      "features": {
+        "total_supply": 5164,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 9.680459645684845,
+        "market_cap": 270.81964331550313,
+        "total_volume": 213.1275409612056,
+        "num_owners": 10709,
+        "average_price": 16.846804802799987,
+        "reddit_mentions": 10,
+        "reddit_sentiment": 0.9661903084102894,
+        "reddit_engagement": 100
+      },
+      "collection_slug": "legit_collection_1906"
+    },
+    {
+      "features": {
+        "total_supply": 3385,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.5036282508767136,
+        "market_cap": 12188.970975288308,
+        "total_volume": 11905.35898392466,
+        "num_owners": 16208,
+        "average_price": 4.687664481129407,
+        "reddit_mentions": 8,
+        "reddit_sentiment": 0.6925892490473176,
+        "reddit_engagement": 120
+      },
+      "collection_slug": "legit_collection_262"
+    },
+    {
+      "features": {
+        "total_supply": 1335,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.12078950474001678,
+        "market_cap": 7.330723366389397,
+        "total_volume": 7.5380703926149675,
+        "num_owners": 222,
+        "average_price": 0.22479775342987784,
+        "reddit_mentions": 0,
+        "reddit_sentiment": 0.3576610969074586,
+        "reddit_engagement": 11
+      },
+      "collection_slug": "suspicious_collection_3828"
+    },
+    {
+      "features": {
+        "total_supply": 12093,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.3665079718917318,
+        "market_cap": 78716.93320169969,
+        "total_volume": 42067.48533289425,
+        "num_owners": 5341,
+        "average_price": 1.109709097021724,
+        "reddit_mentions": 9,
+        "reddit_sentiment": 0.42614188074698983,
+        "reddit_engagement": 112
+      },
+      "collection_slug": "legit_collection_4831"
+    },
+    {
+      "features": {
+        "total_supply": 3433,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 4.933540989160407,
+        "market_cap": 4066.102388466044,
+        "total_volume": 2422.6167781632785,
+        "num_owners": 12464,
+        "average_price": 11.897211531591138,
+        "reddit_mentions": 9,
+        "reddit_sentiment": 0.4344355443239291,
+        "reddit_engagement": 79
+      },
+      "collection_slug": "legit_collection_8666"
+    },
+    {
+      "features": {
+        "total_supply": 13765,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 61.08618920058761,
+        "market_cap": 4620.837953580665,
+        "total_volume": 5532.126742787353,
+        "num_owners": 12503,
+        "average_price": 192.92501372931483,
+        "reddit_mentions": 15,
+        "reddit_sentiment": 0.9608765791449604,
+        "reddit_engagement": 104
+      },
+      "collection_slug": "legit_collection_4648"
+    },
+    {
+      "features": {
+        "total_supply": 5555,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.833219507977043,
+        "market_cap": 798.83458452288,
+        "total_volume": 577.7200370690135,
+        "num_owners": 17840,
+        "average_price": 1.1711126283259474,
+        "reddit_mentions": 12,
+        "reddit_sentiment": 0.9121099189605995,
+        "reddit_engagement": 105
+      },
+      "collection_slug": "legit_collection_8754"
+    },
+    {
+      "features": {
+        "total_supply": 8043,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 1.2277321886825456,
+        "market_cap": 217.96987700826682,
+        "total_volume": 196.0265643368581,
+        "num_owners": 122,
+        "average_price": 1.6544096262611332,
+        "reddit_mentions": 3,
+        "reddit_sentiment": 0.4762674664148955,
+        "reddit_engagement": 5
+      },
+      "collection_slug": "suspicious_collection_2159"
+    },
+    {
+      "features": {
+        "total_supply": 1302,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.7339575654023967,
+        "market_cap": 1035.340799724185,
+        "total_volume": 873.0427485239544,
+        "num_owners": 10988,
+        "average_price": 3.6397374317444706,
+        "reddit_mentions": 12,
+        "reddit_sentiment": 0.8548404763857369,
+        "reddit_engagement": 83
+      },
+      "collection_slug": "legit_collection_364"
+    },
+    {
+      "features": {
+        "total_supply": 10435,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.4213588920353886,
+        "market_cap": 7434.113144972082,
+        "total_volume": 6440.175448255716,
+        "num_owners": 16100,
+        "average_price": 3.3142436370389743,
+        "reddit_mentions": 10,
+        "reddit_sentiment": 0.5965193831493151,
+        "reddit_engagement": 103
+      },
+      "collection_slug": "legit_collection_6295"
+    },
+    {
+      "features": {
+        "total_supply": 6475,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.75710109390344,
+        "market_cap": 3071.932883303518,
+        "total_volume": 2736.901073956653,
+        "num_owners": 3099,
+        "average_price": 4.721126470381804,
+        "reddit_mentions": 9,
+        "reddit_sentiment": 0.22861743299741774,
+        "reddit_engagement": 106
+      },
+      "collection_slug": "legit_collection_8041"
+    },
+    {
+      "features": {
+        "total_supply": 3693,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 23.409385029893826,
+        "market_cap": 6889.005415734826,
+        "total_volume": 7122.644205182948,
+        "num_owners": 6874,
+        "average_price": 44.665900032507786,
+        "reddit_mentions": 13,
+        "reddit_sentiment": 0.75354939434961,
+        "reddit_engagement": 110
+      },
+      "collection_slug": "legit_collection_5592"
+    },
+    {
+      "features": {
+        "total_supply": 18216,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.22446129637051979,
+        "market_cap": 682.2312336212116,
+        "total_volume": 463.6082391738256,
+        "num_owners": 12842,
+        "average_price": 0.7529580555925292,
+        "reddit_mentions": 9,
+        "reddit_sentiment": 0.22419237815553228,
+        "reddit_engagement": 106
+      },
+      "collection_slug": "legit_collection_3310"
+    },
+    {
+      "features": {
+        "total_supply": 12421,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.403722408193627,
+        "market_cap": 19491.99993150062,
+        "total_volume": 10094.96042295724,
+        "num_owners": 4906,
+        "average_price": 1.7360724570154622,
+        "reddit_mentions": 13,
+        "reddit_sentiment": 0.1546526773645958,
+        "reddit_engagement": 101
+      },
+      "collection_slug": "legit_collection_8264"
+    },
+    {
+      "features": {
+        "total_supply": 7388,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.5582070082416327,
+        "market_cap": 244.56318349382227,
+        "total_volume": 484.063437570153,
+        "num_owners": 94,
+        "average_price": 0.9824141748168927,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.35494351028428744,
+        "reddit_engagement": 14
+      },
+      "collection_slug": "suspicious_collection_226"
+    },
+    {
+      "features": {
+        "total_supply": 7514,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 23.071459686406307,
+        "market_cap": 13779.577253206082,
+        "total_volume": 7225.790571046668,
+        "num_owners": 6459,
+        "average_price": 59.03274709240308,
+        "reddit_mentions": 13,
+        "reddit_sentiment": 0.7136700370230616,
+        "reddit_engagement": 95
+      },
+      "collection_slug": "legit_collection_4212"
+    },
+    {
+      "features": {
+        "total_supply": 6726,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 11.099753921859383,
+        "market_cap": 10667.414997577962,
+        "total_volume": 6615.032677462572,
+        "num_owners": 12438,
+        "average_price": 28.158723636449412,
+        "reddit_mentions": 10,
+        "reddit_sentiment": 0.5576810241551933,
+        "reddit_engagement": 90
+      },
+      "collection_slug": "legit_collection_6748"
+    },
+    {
+      "features": {
+        "total_supply": 16254,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 4.054421255909017,
+        "market_cap": 3458.891370635414,
+        "total_volume": 2024.6391237889748,
+        "num_owners": 3919,
+        "average_price": 6.184677844130561,
+        "reddit_mentions": 10,
+        "reddit_sentiment": 0.8734060526488421,
+        "reddit_engagement": 109
+      },
+      "collection_slug": "legit_collection_6881"
+    },
+    {
+      "features": {
+        "total_supply": 203,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.068519699585599,
+        "market_cap": 38.92787752307245,
+        "total_volume": 46.297752923502834,
+        "num_owners": 312,
+        "average_price": 0.07983024787408026,
+        "reddit_mentions": 2,
+        "reddit_sentiment": 0.08333007975097519,
+        "reddit_engagement": 9
+      },
+      "collection_slug": "suspicious_collection_2261"
+    },
+    {
+      "features": {
+        "total_supply": 10996,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 15.379073078120825,
+        "market_cap": 302.24973369652116,
+        "total_volume": 171.26839581698547,
+        "num_owners": 12279,
+        "average_price": 45.13684967137444,
+        "reddit_mentions": 8,
+        "reddit_sentiment": 0.5641792590806401,
+        "reddit_engagement": 113
+      },
+      "collection_slug": "legit_collection_2032"
+    },
+    {
+      "features": {
+        "total_supply": 16524,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 4.673083491855869,
+        "market_cap": 10102.297594619906,
+        "total_volume": 7829.891270020787,
+        "num_owners": 2408,
+        "average_price": 12.960059572877723,
+        "reddit_mentions": 16,
+        "reddit_sentiment": 0.7363235741418831,
+        "reddit_engagement": 87
+      },
+      "collection_slug": "legit_collection_2136"
+    },
+    {
+      "features": {
+        "total_supply": 4907,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 2.050500239849157,
+        "market_cap": 19.155924907709135,
+        "total_volume": 24.59798660184685,
+        "num_owners": 188,
+        "average_price": 2.6510244310711473,
+        "reddit_mentions": 2,
+        "reddit_sentiment": 0.7628751530006882,
+        "reddit_engagement": 12
+      },
+      "collection_slug": "suspicious_collection_7938"
+    },
+    {
+      "features": {
+        "total_supply": 2060,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 3.788722758250976,
+        "market_cap": 18079.693156895737,
+        "total_volume": 10309.023653591066,
+        "num_owners": 7522,
+        "average_price": 8.069213294215384,
+        "reddit_mentions": 7,
+        "reddit_sentiment": 0.4183120681448707,
+        "reddit_engagement": 117
+      },
+      "collection_slug": "legit_collection_190"
+    },
+    {
+      "features": {
+        "total_supply": 13688,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.7504830588438767,
+        "market_cap": 567.8351187923886,
+        "total_volume": 672.5797762908402,
+        "num_owners": 5237,
+        "average_price": 1.4332724977185187,
+        "reddit_mentions": 11,
+        "reddit_sentiment": 0.0799866639223753,
+        "reddit_engagement": 83
+      },
+      "collection_slug": "legit_collection_6287"
+    },
+    {
+      "features": {
+        "total_supply": 5167,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 2.239044260605292,
+        "market_cap": 319.51061271868724,
+        "total_volume": 398.6516562044592,
+        "num_owners": 12036,
+        "average_price": 5.462657655494254,
+        "reddit_mentions": 7,
+        "reddit_sentiment": 0.7144200023046989,
+        "reddit_engagement": 103
+      },
+      "collection_slug": "legit_collection_6154"
+    },
+    {
+      "features": {
+        "total_supply": 6782,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 7.678162666647542,
+        "market_cap": 10244.643858278589,
+        "total_volume": 9378.209301429393,
+        "num_owners": 17169,
+        "average_price": 16.94253038167055,
+        "reddit_mentions": 11,
+        "reddit_sentiment": 0.5417722690393192,
+        "reddit_engagement": 106
+      },
+      "collection_slug": "legit_collection_5962"
+    },
+    {
+      "features": {
+        "total_supply": 13666,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 4.725529226010214,
+        "market_cap": 5182.970014024863,
+        "total_volume": 3391.0171765456016,
+        "num_owners": 7708,
+        "average_price": 7.560555978070464,
+        "reddit_mentions": 6,
+        "reddit_sentiment": 0.7353900126807261,
+        "reddit_engagement": 90
+      },
+      "collection_slug": "legit_collection_3104"
+    },
+    {
+      "features": {
+        "total_supply": 3071,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.5635691644544404,
+        "market_cap": 26105.53746963331,
+        "total_volume": 17991.728963507427,
+        "num_owners": 16502,
+        "average_price": 0.5749090336780573,
+        "reddit_mentions": 9,
+        "reddit_sentiment": 0.5567507171302273,
+        "reddit_engagement": 126
+      },
+      "collection_slug": "legit_collection_1712"
+    },
+    {
+      "features": {
+        "total_supply": 5754,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.3962808034998733,
+        "market_cap": 48.72981113340152,
+        "total_volume": 42.86191556236432,
+        "num_owners": 431,
+        "average_price": 0.42751238883602277,
+        "reddit_mentions": 2,
+        "reddit_sentiment": 0.20025071739420874,
+        "reddit_engagement": 11
+      },
+      "collection_slug": "suspicious_collection_7939"
+    },
+    {
+      "features": {
+        "total_supply": 1823,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 2.2330350829082635,
+        "market_cap": 60911.33821148099,
+        "total_volume": 48589.71107397091,
+        "num_owners": 15985,
+        "average_price": 4.756560745954253,
+        "reddit_mentions": 3,
+        "reddit_sentiment": 0.8701564744925572,
+        "reddit_engagement": 127
+      },
+      "collection_slug": "legit_collection_4910"
+    },
+    {
+      "features": {
+        "total_supply": 1058,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.1918262491060158,
+        "market_cap": 35.195983264332206,
+        "total_volume": 24.15112227817974,
+        "num_owners": 470,
+        "average_price": 0.28034602862127705,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.742707145067747,
+        "reddit_engagement": 10
+      },
+      "collection_slug": "suspicious_collection_7340"
+    },
+    {
+      "features": {
+        "total_supply": 6124,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.27382999524206286,
+        "market_cap": 9121.506304379223,
+        "total_volume": 5134.381607854099,
+        "num_owners": 3279,
+        "average_price": 0.41939408708759046,
+        "reddit_mentions": 6,
+        "reddit_sentiment": 0.5505594001628821,
+        "reddit_engagement": 83
+      },
+      "collection_slug": "legit_collection_7449"
+    },
+    {
+      "features": {
+        "total_supply": 5012,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.041797854468465935,
+        "market_cap": 89.02376706755798,
+        "total_volume": 112.19284312995072,
+        "num_owners": 386,
+        "average_price": 0.038317477083620696,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.48868062345016794,
+        "reddit_engagement": 12
+      },
+      "collection_slug": "suspicious_collection_6132"
+    },
+    {
+      "features": {
+        "total_supply": 13891,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.1999157995793301,
+        "market_cap": 94355.4637720087,
+        "total_volume": 62831.6237707155,
+        "num_owners": 6590,
+        "average_price": 0.2348677517670343,
+        "reddit_mentions": 11,
+        "reddit_sentiment": 0.8226782464140233,
+        "reddit_engagement": 89
+      },
+      "collection_slug": "legit_collection_2593"
+    },
+    {
+      "features": {
+        "total_supply": 1145,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.474281727825373,
+        "market_cap": 111.41649615839658,
+        "total_volume": 71.74245062768034,
+        "num_owners": 18655,
+        "average_price": 5.096629330958214,
+        "reddit_mentions": 13,
+        "reddit_sentiment": 0.8996194352080104,
+        "reddit_engagement": 96
+      },
+      "collection_slug": "legit_collection_8056"
+    },
+    {
+      "features": {
+        "total_supply": 18532,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.6571002098337557,
+        "market_cap": 5544.000953361834,
+        "total_volume": 6263.494162441366,
+        "num_owners": 8673,
+        "average_price": 1.9375520990576967,
+        "reddit_mentions": 15,
+        "reddit_sentiment": 0.6316522679038485,
+        "reddit_engagement": 99
+      },
+      "collection_slug": "legit_collection_2491"
+    },
+    {
+      "features": {
+        "total_supply": 6519,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.6061824197062675,
+        "market_cap": 119.358715296486,
+        "total_volume": 146.1365275180729,
+        "num_owners": 391,
+        "average_price": 1.6779002394990483,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.6903288222744551,
+        "reddit_engagement": 8
+      },
+      "collection_slug": "suspicious_collection_8766"
+    },
+    {
+      "features": {
+        "total_supply": 5491,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 13.021144922434935,
+        "market_cap": 3642.6057465621243,
+        "total_volume": 3076.3704705971804,
+        "num_owners": 1198,
+        "average_price": 13.93209374357535,
+        "reddit_mentions": 14,
+        "reddit_sentiment": 0.6573166308816102,
+        "reddit_engagement": 83
+      },
+      "collection_slug": "legit_collection_2156"
+    },
+    {
+      "features": {
+        "total_supply": 11222,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 4.769665573408342,
+        "market_cap": 9939.10057072726,
+        "total_volume": 6388.690943662717,
+        "num_owners": 1226,
+        "average_price": 15.197212855117222,
+        "reddit_mentions": 6,
+        "reddit_sentiment": 0.6076094492537607,
+        "reddit_engagement": 91
+      },
+      "collection_slug": "legit_collection_9179"
+    },
+    {
+      "features": {
+        "total_supply": 14481,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 3.2597267390383555,
+        "market_cap": 17340.104341224323,
+        "total_volume": 10874.713150959387,
+        "num_owners": 6683,
+        "average_price": 7.586936738678248,
+        "reddit_mentions": 8,
+        "reddit_sentiment": 0.570859034354391,
+        "reddit_engagement": 106
+      },
+      "collection_slug": "legit_collection_2808"
+    },
+    {
+      "features": {
+        "total_supply": 17489,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 3.174557873475936,
+        "market_cap": 6621.481712876083,
+        "total_volume": 5271.505082632698,
+        "num_owners": 13111,
+        "average_price": 10.548983663399293,
+        "reddit_mentions": 8,
+        "reddit_sentiment": 0.4126905382956465,
+        "reddit_engagement": 110
+      },
+      "collection_slug": "legit_collection_3530"
+    },
+    {
+      "features": {
+        "total_supply": 13183,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 9.512747422530195,
+        "market_cap": 9627.455149287125,
+        "total_volume": 6566.079737597518,
+        "num_owners": 12335,
+        "average_price": 14.309443501613515,
+        "reddit_mentions": 10,
+        "reddit_sentiment": 0.7928560087590056,
+        "reddit_engagement": 112
+      },
+      "collection_slug": "legit_collection_2557"
+    },
+    {
+      "features": {
+        "total_supply": 3852,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.6110137093691511,
+        "market_cap": 1830.9477591883328,
+        "total_volume": 1054.3104215152134,
+        "num_owners": 12837,
+        "average_price": 1.6963492852363917,
+        "reddit_mentions": 6,
+        "reddit_sentiment": 0.75732155100077,
+        "reddit_engagement": 101
+      },
+      "collection_slug": "legit_collection_6652"
+    },
+    {
+      "features": {
+        "total_supply": 5780,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 13.208662690293707,
+        "market_cap": 5383.76350382969,
+        "total_volume": 4009.410119210025,
+        "num_owners": 1014,
+        "average_price": 12.02035970190874,
+        "reddit_mentions": 6,
+        "reddit_sentiment": 0.5042459165465726,
+        "reddit_engagement": 103
+      },
+      "collection_slug": "legit_collection_7057"
+    },
+    {
+      "features": {
+        "total_supply": 10333,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 3.349327552207289,
+        "market_cap": 22117.448221770763,
+        "total_volume": 11635.405430119143,
+        "num_owners": 9337,
+        "average_price": 11.497174189848684,
+        "reddit_mentions": 10,
+        "reddit_sentiment": 0.6152386092718033,
+        "reddit_engagement": 111
+      },
+      "collection_slug": "legit_collection_9765"
+    },
+    {
+      "features": {
+        "total_supply": 1667,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 2.9552498456600205,
+        "market_cap": 25956.402527242866,
+        "total_volume": 13033.216062955895,
+        "num_owners": 14343,
+        "average_price": 2.966105297368097,
+        "reddit_mentions": 6,
+        "reddit_sentiment": 0.2813454842094987,
+        "reddit_engagement": 125
+      },
+      "collection_slug": "legit_collection_539"
+    },
+    {
+      "features": {
+        "total_supply": 8009,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.7430073051816715,
+        "market_cap": 1444.75759392681,
+        "total_volume": 853.7697288503683,
+        "num_owners": 4498,
+        "average_price": 1.3996772228749486,
+        "reddit_mentions": 10,
+        "reddit_sentiment": 0.7183526675063076,
+        "reddit_engagement": 102
+      },
+      "collection_slug": "legit_collection_5352"
+    },
+    {
+      "features": {
+        "total_supply": 1559,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.12698458506226465,
+        "market_cap": 133.31814361787747,
+        "total_volume": 196.702205962945,
+        "num_owners": 404,
+        "average_price": 0.07535743973862488,
+        "reddit_mentions": 3,
+        "reddit_sentiment": 0.7364623583557306,
+        "reddit_engagement": 9
+      },
+      "collection_slug": "suspicious_collection_6548"
+    },
+    {
+      "features": {
+        "total_supply": 15277,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 1.9007977695840617,
+        "market_cap": 116473.75321503826,
+        "total_volume": 77595.40131882645,
+        "num_owners": 14869,
+        "average_price": 4.3830574044949,
+        "reddit_mentions": 11,
+        "reddit_sentiment": 0.7319245219250814,
+        "reddit_engagement": 92
+      },
+      "collection_slug": "legit_collection_6986"
+    },
+    {
+      "features": {
+        "total_supply": 695,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.8248482232211123,
+        "market_cap": 171.34830293667136,
+        "total_volume": 272.8060234892433,
+        "num_owners": 275,
+        "average_price": 0.5495237376947052,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.8307225247114479,
+        "reddit_engagement": 8
+      },
+      "collection_slug": "suspicious_collection_4875"
+    },
+    {
+      "features": {
+        "total_supply": 5809,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 4.092297868262953,
+        "market_cap": 4741.014297590921,
+        "total_volume": 2618.5597706496696,
+        "num_owners": 14272,
+        "average_price": 3.9755934716800976,
+        "reddit_mentions": 2,
+        "reddit_sentiment": 0.41056038868461986,
+        "reddit_engagement": 102
+      },
+      "collection_slug": "legit_collection_716"
+    },
+    {
+      "features": {
+        "total_supply": 12645,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 17.789863611770457,
+        "market_cap": 4375.484962174923,
+        "total_volume": 2700.992584679114,
+        "num_owners": 12301,
+        "average_price": 21.86611492130894,
+        "reddit_mentions": 10,
+        "reddit_sentiment": 0.8575806825344424,
+        "reddit_engagement": 87
+      },
+      "collection_slug": "legit_collection_1682"
+    },
+    {
+      "features": {
+        "total_supply": 4043,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 1.2998372401000462,
+        "market_cap": 7.573032683893014,
+        "total_volume": 9.505171269567665,
+        "num_owners": 94,
+        "average_price": 2.5120534491158026,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.197887994765472,
+        "reddit_engagement": 11
+      },
+      "collection_slug": "suspicious_collection_935"
+    },
+    {
+      "features": {
+        "total_supply": 6593,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.1583688464620421,
+        "market_cap": 7.070482485677967,
+        "total_volume": 7.441646816138112,
+        "num_owners": 176,
+        "average_price": 0.2969341206209719,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.01839067886313834,
+        "reddit_engagement": 12
+      },
+      "collection_slug": "suspicious_collection_5906"
+    },
+    {
+      "features": {
+        "total_supply": 3143,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.3401241938784416,
+        "market_cap": 10041.064977998096,
+        "total_volume": 10661.59323272234,
+        "num_owners": 6245,
+        "average_price": 3.347825474051315,
+        "reddit_mentions": 14,
+        "reddit_sentiment": 0.4244651251434846,
+        "reddit_engagement": 97
+      },
+      "collection_slug": "legit_collection_2914"
+    },
+    {
+      "features": {
+        "total_supply": 14807,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 4.01253005852583,
+        "market_cap": 60590.53539075029,
+        "total_volume": 36788.47421802516,
+        "num_owners": 5346,
+        "average_price": 4.75917178718233,
+        "reddit_mentions": 13,
+        "reddit_sentiment": 0.5904566915479125,
+        "reddit_engagement": 83
+      },
+      "collection_slug": "legit_collection_3141"
+    },
+    {
+      "features": {
+        "total_supply": 8560,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 0.8698601266586241,
+        "market_cap": 1366.377232359542,
+        "total_volume": 1217.6207183080585,
+        "num_owners": 2316,
+        "average_price": 1.6228692984638067,
+        "reddit_mentions": 4,
+        "reddit_sentiment": 0.2602407656179207,
+        "reddit_engagement": 95
+      },
+      "collection_slug": "legit_collection_8716"
+    },
+    {
+      "features": {
+        "total_supply": 1147,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 2.2054562199793697,
+        "market_cap": 41.652110069326234,
+        "total_volume": 32.938864804232665,
+        "num_owners": 264,
+        "average_price": 3.77107433299352,
+        "reddit_mentions": 2,
+        "reddit_sentiment": 0.19243053586711567,
+        "reddit_engagement": 7
+      },
+      "collection_slug": "suspicious_collection_276"
+    },
+    {
+      "features": {
+        "total_supply": 7229,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 1,
+        "floor_price": 4.39410014271251,
+        "market_cap": 1666.359249483867,
+        "total_volume": 918.9504092715321,
+        "num_owners": 6370,
+        "average_price": 3.8768038789937056,
+        "reddit_mentions": 14,
+        "reddit_sentiment": 0.6122653419533582,
+        "reddit_engagement": 102
+      },
+      "collection_slug": "legit_collection_8258"
+    },
+    {
+      "features": {
+        "total_supply": 670,
+        "is_verified": 0,
+        "has_discord": 1,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.6994013275065962,
+        "market_cap": 229.94323556501325,
+        "total_volume": 210.33543597427058,
+        "num_owners": 429,
+        "average_price": 1.3872922839109698,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.1435711798519521,
+        "reddit_engagement": 13
+      },
+      "collection_slug": "suspicious_collection_3516"
+    },
+    {
+      "features": {
+        "total_supply": 12922,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 4.630122445105109,
+        "market_cap": 13043.404786605284,
+        "total_volume": 9527.62812092674,
+        "num_owners": 10957,
+        "average_price": 13.247168977695909,
+        "reddit_mentions": 13,
+        "reddit_sentiment": 0.9170972865688382,
+        "reddit_engagement": 114
+      },
+      "collection_slug": "legit_collection_5878"
+    },
+    {
+      "features": {
+        "total_supply": 4374,
+        "is_verified": 1,
+        "has_discord": 1,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 5.21907501245388,
+        "market_cap": 2281.37817915952,
+        "total_volume": 1709.7090723108015,
+        "num_owners": 5099,
+        "average_price": 12.340086532082395,
+        "reddit_mentions": 12,
+        "reddit_sentiment": 0.2733763064964982,
+        "reddit_engagement": 103
+      },
+      "collection_slug": "legit_collection_3432"
+    },
+    {
+      "features": {
+        "total_supply": 2990,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 1,
+        "collection_offers_enabled": 0,
+        "floor_price": 0.9063863254935295,
+        "market_cap": 5594.403630129742,
+        "total_volume": 4311.993147575294,
+        "num_owners": 2125,
+        "average_price": 2.9762193511861823,
+        "reddit_mentions": 8,
+        "reddit_sentiment": 0.3468939157671689,
+        "reddit_engagement": 87
+      },
+      "collection_slug": "legit_collection_2713"
+    },
+    {
+      "features": {
+        "total_supply": 10903,
+        "is_verified": 1,
+        "has_discord": 0,
+        "has_twitter": 1,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 1,
+        "floor_price": 1.3158023947689215,
+        "market_cap": 5186.71470053627,
+        "total_volume": 2845.727506987133,
+        "num_owners": 14274,
+        "average_price": 3.3804981274656187,
+        "reddit_mentions": 10,
+        "reddit_sentiment": 0.7261949088419117,
+        "reddit_engagement": 100
+      },
+      "collection_slug": "legit_collection_2396"
+    },
+    {
+      "features": {
+        "total_supply": 5671,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 1.0891699374338302,
+        "market_cap": 173.10516517694228,
+        "total_volume": 148.5900501031764,
+        "num_owners": 214,
+        "average_price": 1.607781276059613,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.39972522992882037,
+        "reddit_engagement": 9
+      },
+      "collection_slug": "suspicious_collection_1750"
+    },
+    {
+      "features": {
+        "total_supply": 9077,
+        "is_verified": 0,
+        "has_discord": 0,
+        "has_twitter": 0,
+        "trait_offers_enabled": 0,
+        "collection_offers_enabled": 0,
+        "floor_price": 1.438821318627846,
+        "market_cap": 255.6790542541156,
+        "total_volume": 465.004567375575,
+        "num_owners": 299,
+        "average_price": 1.7908889941329513,
+        "reddit_mentions": 1,
+        "reddit_sentiment": 0.1521746073001776,
+        "reddit_engagement": 17
+      },
+      "collection_slug": "suspicious_collection_905"
+    }
+  ]
+}

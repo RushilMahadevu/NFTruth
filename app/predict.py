@@ -11,7 +11,7 @@ from opensea_collections import COLLECTION_SLUGS
 from difflib import get_close_matches
 import re
 from urllib.parse import urlparse
-from typing import Dict
+from typing import Dict, List, Tuple
 
 # Load environment variables
 load_dotenv()
@@ -26,6 +26,7 @@ class NFTPredictor:
         self.scaler = None
         self.feature_names = []
         self.reddit_collector = None
+        self.prediction_history = []  # Track predictions for summary
         self.load_model()
         self.setup_reddit_collector()
     
@@ -227,9 +228,204 @@ class NFTPredictor:
             'total_engagement': total_engagement
         }
 
+    def get_confidence_tier(self, confidence: float) -> dict:
+        """
+        Get confidence tier information with badges and colors
+        """
+        if confidence >= 70:
+            return {
+                'tier': 'Trusted',
+                'badge': '🟢',
+                'color': 'green',
+                'description': 'High confidence - Strong legitimacy indicators'
+            }
+        elif confidence >= 40:
+            return {
+                'tier': 'Caution',
+                'badge': '🟡',
+                'color': 'orange', 
+                'description': 'Medium confidence - Mixed indicators, proceed carefully'
+            }
+        else:
+            return {
+                'tier': 'Suspicious',
+                'badge': '🔴',
+                'color': 'red',
+                'description': 'Low confidence - Multiple risk factors detected'
+            }
+    
+    def get_risk_level(self, risk_score: float) -> dict:
+        """
+        Get risk level information
+        """
+        if risk_score >= 70:
+            return {'level': 'Very High', 'emoji': '🚨', 'color': 'red'}
+        elif risk_score >= 50:
+            return {'level': 'High', 'emoji': '⚠️', 'color': 'orange'}
+        elif risk_score >= 30:
+            return {'level': 'Medium', 'emoji': '⚡', 'color': 'yellow'}
+        else:
+            return {'level': 'Low', 'emoji': '✅', 'color': 'green'}
+    
+    def log_confidence_factors(self, features: dict, prediction_result: dict) -> dict:
+        """
+        Log specific factors that influenced confidence scoring
+        """
+        factors = {
+            'positive_factors': [],
+            'negative_factors': [],
+            'caps_applied': [],
+            'warnings': []
+        }
+        
+        # Analyze factors based on features
+        total_volume = features.get('total_volume', 0)
+        is_verified = features.get('is_verified', 0)
+        has_discord = features.get('has_discord', 0)
+        has_twitter = features.get('has_twitter', 0)
+        reddit_mentions = features.get('reddit_mentions', 0)
+        reddit_sentiment = features.get('reddit_sentiment', 0.5)
+        num_owners = features.get('num_owners', 0)
+        floor_price = features.get('floor_price', 0)
+        
+        # Positive factors
+        if total_volume > 100000:
+            factors['positive_factors'].append(f"High trading volume ({total_volume:,.0f} ETH)")
+        elif total_volume > 10000:
+            factors['positive_factors'].append(f"Good trading volume ({total_volume:,.0f} ETH)")
+        
+        if is_verified:
+            factors['positive_factors'].append("OpenSea verified collection ✓")
+        
+        if has_discord and has_twitter:
+            factors['positive_factors'].append("Complete social media presence")
+        elif has_discord or has_twitter:
+            factors['positive_factors'].append("Partial social media presence")
+        
+        if reddit_mentions > 20:
+            factors['positive_factors'].append(f"Strong Reddit community ({reddit_mentions} mentions)")
+        elif reddit_mentions > 5:
+            factors['positive_factors'].append(f"Active Reddit discussion ({reddit_mentions} mentions)")
+        
+        if reddit_sentiment > 0.7:
+            factors['positive_factors'].append(f"Positive community sentiment ({reddit_sentiment:.2f})")
+        
+        if num_owners > 5000:
+            factors['positive_factors'].append(f"Wide ownership distribution ({num_owners:,} owners)")
+        
+        # Negative factors
+        if total_volume < 10:
+            factors['negative_factors'].append(f"Very low trading volume ({total_volume:.2f} ETH)")
+        elif total_volume < 100:
+            factors['negative_factors'].append(f"Low trading volume ({total_volume:.2f} ETH)")
+        
+        if not is_verified:
+            factors['negative_factors'].append("Not OpenSea verified")
+        
+        if not has_discord and not has_twitter:
+            factors['negative_factors'].append("No social media presence")
+        
+        if reddit_mentions == 0:
+            factors['negative_factors'].append("No Reddit community activity")
+        elif reddit_mentions < 5:
+            factors['negative_factors'].append(f"Limited Reddit activity ({reddit_mentions} mentions)")
+        
+        if reddit_sentiment < 0.4:
+            factors['negative_factors'].append(f"Negative community sentiment ({reddit_sentiment:.2f})")
+        
+        if num_owners < 50:
+            factors['negative_factors'].append(f"Concentrated ownership ({num_owners} owners)")
+        
+        if floor_price > 500:
+            factors['negative_factors'].append(f"Extremely high floor price ({floor_price:.2f} ETH)")
+        elif floor_price < 0.001:
+            factors['negative_factors'].append(f"Suspiciously low floor price ({floor_price:.6f} ETH)")
+        
+        # Caps applied (reasons for limiting confidence)
+        confidence = prediction_result.get('confidence', 0)
+        
+        if 'risk_flags' in prediction_result and prediction_result['risk_flags'] >= 3:
+            factors['caps_applied'].append(f"Multiple red flags detected ({prediction_result['risk_flags']} flags)")
+        
+        if not is_verified and total_volume < 1000:
+            factors['caps_applied'].append("Unverified collection with low volume")
+        
+        if not has_discord and not has_twitter and reddit_mentions == 0:
+            factors['caps_applied'].append("Complete absence of community signals")
+        
+        if total_volume < 1 and reddit_mentions < 5:
+            factors['caps_applied'].append("Minimal trading and community activity")
+        
+        # Warnings
+        if confidence < 30:
+            factors['warnings'].append("Very high risk - multiple red flags")
+        elif confidence < 50:
+            factors['warnings'].append("High risk - proceed with extreme caution")
+        elif not prediction_result.get('minimum_criteria_met', True):
+            factors['warnings'].append("Limited verification signals available")
+        
+        return factors
+    
+    def generate_summary_report(self) -> str:
+        """
+        Generate a summary report of all predictions made in this session
+        """
+        if not self.prediction_history:
+            return "No predictions made in this session."
+        
+        summary_lines = [
+            "🧠 PREDICTION SUMMARY REPORT",
+            "=" * 60,
+            f"Total Collections Analyzed: {len(self.prediction_history)}",
+            ""
+        ]
+        
+        # Add table header
+        summary_lines.extend([
+            f"{'Collection':<20} {'Prediction':<12} {'Confidence':<12} {'Risk':<8} {'Verdict':<8}",
+            "-" * 60
+        ])
+        
+        # Add each prediction
+        for pred in self.prediction_history:
+            collection = pred['collection'][:18] + '..' if len(pred['collection']) > 20 else pred['collection']
+            prediction = pred['prediction']
+            confidence = f"{pred['confidence']:.1f}%"
+            risk_info = self.get_risk_level(pred['risk_score'])
+            risk = risk_info['level'][:3]  # Abbreviated
+            
+            # Determine verdict based on confidence tier
+            tier_info = self.get_confidence_tier(pred['confidence'])
+            verdict = tier_info['badge']
+            
+            summary_lines.append(
+                f"{collection:<20} {prediction:<12} {confidence:<12} {risk:<8} {verdict:<8}"
+            )
+        
+        # Add statistics
+        total_count = len(self.prediction_history)
+        legitimate_count = sum(1 for p in self.prediction_history if p['prediction'] == 'Legitimate')
+        suspicious_count = total_count - legitimate_count
+        avg_confidence = sum(p['confidence'] for p in self.prediction_history) / total_count
+        
+        summary_lines.extend([
+            "",
+            "📊 SESSION STATISTICS:",
+            f"   • Legitimate Collections: {legitimate_count} ({legitimate_count/total_count*100:.1f}%)",
+            f"   • Suspicious Collections: {suspicious_count} ({suspicious_count/total_count*100:.1f}%)", 
+            f"   • Average Confidence: {avg_confidence:.1f}%",
+            "",
+            "🔧 CONFIDENCE TIER BREAKDOWN:",
+            f"   • 🟢 Trusted (70%+): {sum(1 for p in self.prediction_history if p['confidence'] >= 70)}",
+            f"   • 🟡 Caution (40-69%): {sum(1 for p in self.prediction_history if 40 <= p['confidence'] < 70)}",
+            f"   • 🔴 Suspicious (<40%): {sum(1 for p in self.prediction_history if p['confidence'] < 40)}",
+        ])
+        
+        return "\n".join(summary_lines)
+
     def predict_collection(self, collection_slug: str) -> dict:
         """
-        Predict authenticity for a given NFT collection
+        Predict authenticity for a given NFT collection with enhanced reporting
         """
         if not self.model:
             return {"error": "Model not loaded"}
@@ -292,18 +488,44 @@ class NFTPredictor:
             prediction = self.model.predict(features_scaled)[0]
             probability = self.model.predict_proba(features_scaled)[0]
             
-            # Prepare result
+            # Calculate enhanced metrics
+            confidence = float(probability[1] * 100) if len(probability) > 1 else 0.0
+            risk_score = float((1 - probability[1]) * 100) if len(probability) > 1 else 100.0
+            
+            # Get tier and risk information
+            tier_info = self.get_confidence_tier(confidence)
+            risk_info = self.get_risk_level(risk_score)
+            
+            # Log confidence factors
+            confidence_factors = self.log_confidence_factors(features, {
+                'confidence': confidence,
+                'risk_flags': 0,  # You can calculate this based on features
+                'minimum_criteria_met': True  # You can calculate this based on features
+            })
+            
+            # Prepare enhanced result
             result = {
                 "collection": collection_slug,
+                "collection_name": collection_name,
                 "prediction": "Legitimate" if prediction == 1 else "Suspicious",
-                "confidence": {
-                    "legitimate": float(probability[1]) if len(probability) > 1 else 0.0,
-                    "suspicious": float(probability[0]) if len(probability) > 0 else 0.0
-                },
+                "confidence": confidence,
+                "confidence_tier": tier_info,
+                "risk_score": risk_score,
+                "risk_level": risk_info,
                 "features_analyzed": features,
-                "risk_score": float(1 - probability[1]) if len(probability) > 1 else 1.0,
-                "timestamp": pd.Timestamp.now().isoformat()
+                "confidence_factors": confidence_factors,
+                "timestamp": pd.Timestamp.now().isoformat(),
+                "opensea_url": f"https://opensea.io/collection/{collection_slug}"
             }
+            
+            # Add to prediction history
+            self.prediction_history.append({
+                'collection': collection_name or collection_slug,
+                'prediction': result['prediction'],
+                'confidence': confidence,
+                'risk_score': risk_score,
+                'timestamp': result['timestamp']
+            })
             
             return result
             
@@ -449,19 +671,29 @@ class NFTPredictor:
         return cleaned
 
 def main():
-    """Test the predictor"""
+    """Test the predictor with enhanced reporting"""
     predictor = NFTPredictor()
     
     print("\n🤖 NFT Authenticity Predictor 🤖")
     print("=" * 40)
     print("\n💡 Enter collection name, slug, or OpenSea URL")
     print("\nExamples: 🧠 'CryptoPunks' | 😍 'bored-ape-yacht-club' | 🔗 'https://opensea.io/collection/azuki'")
+    print("\nNew Commands:")
+    print("  • 'summary' - Show session summary")
+    print("  • 'help' - Show examples")
+    print("  • 'quit' - Exit")
     
     while True:
-        user_input = input("\n👋 What's the NFT collection? (type 'help' or 'quit' anytime): ").strip()
+        user_input = input("\n👋 What's the NFT collection? ").strip()
         
         if user_input.lower() == 'quit':
+            # Show final summary before quitting
+            print("\n" + predictor.generate_summary_report())
             break
+        
+        if user_input.lower() == 'summary':
+            print("\n" + predictor.generate_summary_report())
+            continue
         
         if user_input.lower() == 'help':
             print("\n📚 EXAMPLES:")
@@ -607,112 +839,64 @@ def main():
         # Proceed with prediction
         result = predictor.predict_collection(normalized_slug)
         
-        print("\n" + "=" * 50)
-        print("🎉 Mission complete! Here's your authenticity report: 🚀")
-        print("=" * 50)
+        print("\n" + "=" * 70)
+        print("🎉 AUTHENTICITY ANALYSIS COMPLETE 🚀")
+        print("=" * 70)
         
         if 'error' in result:
             print(f"❌ Error: {result['error']}")
-            print("\n💡 Troubleshooting:")
-            print("   • Check if the collection exists on OpenSea")
-            print("   • Try the exact collection name or OpenSea URL")
-            print("   • Check your internet connection")
         else:
+            # Enhanced display with tiers and detailed factors
             prediction = result['prediction']
-            emoji = "🟢" if prediction == "Legitimate" else "🔴"
-            risk_score = result['risk_score']*100
+            confidence = result['confidence']
+            tier_info = result['confidence_tier']
+            risk_info = result['risk_level']
             
-            # Determine risk level category
-            risk_level = "Low"
-            if risk_score > 70:
-                risk_level = "Very High"
-            elif risk_score > 50:
-                risk_level = "High"
-            elif risk_score > 30:
-                risk_level = "Medium"
-            
-            # Display collection info
-            display_name = collection_name if collection_name else result['collection']
-            
-            # Header information
-            print(f"{emoji} Collection: {display_name}")
+            # Header with tier badge
+            print(f"{tier_info['badge']} Collection: {result.get('collection_name', result['collection'])}")
             print(f"🔗 Slug: {result['collection']}")
-            print(f"🌐 OpenSea: https://opensea.io/collection/{result['collection']}")
+            print(f"🌐 OpenSea: {result['opensea_url']}")
             print(f"📊 Prediction: {prediction}")
-            print(f"🎯 Confidence: {result['confidence']['legitimate']*100:.1f}% legitimate")
-            print(f"⚠️ Risk Score: {risk_score:.1f}% ({risk_level} Risk)")
+            print(f"🎯 Confidence: {confidence:.1f}% ({tier_info['tier']})")
+            print(f"⚠️ Risk Level: {risk_info['level']} {risk_info['emoji']} ({result['risk_score']:.1f}%)")
+            print(f"💡 {tier_info['description']}")
             
-            # Core metrics
-            print("\n📈 KEY METRICS:")
+            # Confidence factors breakdown
+            factors = result['confidence_factors']
+            
+            if factors['positive_factors']:
+                print(f"\n✅ POSITIVE INDICATORS ({len(factors['positive_factors'])}):")
+                for factor in factors['positive_factors']:
+                    print(f"   • {factor}")
+            
+            if factors['negative_factors']:
+                print(f"\n❌ RISK FACTORS ({len(factors['negative_factors'])}):")
+                for factor in factors['negative_factors']:
+                    print(f"   • {factor}")
+            
+            if factors['caps_applied']:
+                print(f"\n🔒 CONFIDENCE LIMITATIONS:")
+                for cap in factors['caps_applied']:
+                    print(f"   • {cap}")
+            
+            if factors['warnings']:
+                print(f"\n⚠️ WARNINGS:")
+                for warning in factors['warnings']:
+                    print(f"   • {warning}")
+            
+            # Core metrics (existing code)
             features = result['features_analyzed']
+            print("\n📈 KEY METRICS:")
             print(f"   • Floor Price: {features['floor_price']} ETH")
             print(f"   • Total Volume: {features['total_volume']:,.0f} ETH")
             print(f"   • Owners: {features['num_owners']:,}")
             print(f"   • Market Cap: {features['market_cap']:,.0f} ETH")
             print(f"   • Average Price: {features['average_price']:.3f} ETH")
             
-            # Trading metrics
-            volume_per_owner = features['total_volume'] / max(features['num_owners'], 1)
-            mc_volume_ratio = features['market_cap'] / max(features['total_volume'], 0.001)
-            price_premium = features['average_price'] / max(features['floor_price'], 0.001)
-            
-            print("\n📊 TRADING ANALYSIS:")
-            print(f"   • Volume per Owner: {volume_per_owner:.3f} ETH")
-            print(f"   • Market Cap to Volume Ratio: {mc_volume_ratio:.2f}")
-            print(f"   • Price Premium Ratio: {price_premium:.2f}")
-            
-            # Social and verification metrics
-            print("\n🔍 TRUST INDICATORS:")
-            print(f"   • Verified Collection: {'Yes ✓ 🛡️ OpenSea Certified!' if features['is_verified'] else 'No ✗ 🤨 Proceed with caution.'}")
-            print(f"   • Social Media Presence:")
-            print(f"     - Discord: {'Present ✓' if features['has_discord'] else 'Missing ✗'}")
-            print(f"     - Twitter: {'Present ✓' if features['has_twitter'] else 'Missing ✗'}")
-            print(f"   • Reddit Mentions: {features['reddit_mentions']}")
-            print(f"   • Reddit Sentiment: {features['reddit_sentiment']:.2f} (0-1 scale)")
-            
-            # Risk assessment
-            print("\n⚠️ RISK ASSESSMENT:")
-            
-            # Market risk based on liquidity
-            liquidity = (features['total_volume'] * features['num_owners']) ** 0.5
-            if liquidity < 10:
-                print(f"   • Liquidity Risk: HIGH - Limited trading activity")
-            else:
-                print(f"   • Liquidity Risk: LOW - Healthy trading volume")
-            
-            # Ownership concentration risk
-            ownership_concentration = 1 - (features['num_owners'] / max(features['total_supply'], 1))
-            if ownership_concentration > 0.8:
-                print(f"   • Ownership Concentration: HIGH ({ownership_concentration*100:.1f}%)")
-            elif ownership_concentration > 0.5:
-                print(f"   • Ownership Concentration: MEDIUM ({ownership_concentration*100:.1f}%)")
-            else:
-                print(f"   • Ownership Concentration: LOW ({ownership_concentration*100:.1f}%)")
-            
-            # Price risk
-            if price_premium > 2:
-                print(f"   • Price Premium Risk: HIGH ({price_premium:.2f}x floor)")
-            elif price_premium > 1.5:
-                print(f"   • Price Premium Risk: MEDIUM ({price_premium:.2f}x floor)")
-            else:
-                print(f"   • Price Premium Risk: LOW ({price_premium:.2f}x floor)")
-            
-            # Social media risk
-            social_risk = "HIGH" if not (features['has_discord'] or features['has_twitter']) else \
-                          "MEDIUM" if not (features['has_discord'] and features['has_twitter']) else "LOW"
-            print(f"   • Social Media Risk: {social_risk}")
-            
-            print("\n🔮 PREDICTION CONFIDENCE:")
-            if result['confidence']['legitimate'] > 0.9:
-                print("   Very high confidence - strong legitimacy indicators")
-            elif result['confidence']['legitimate'] > 0.7:
-                print("   High confidence - multiple positive indicators")
-            elif result['confidence']['legitimate'] > 0.5:
-                print("   Moderate confidence - mixed indicators")
-            else:
-                print("   Low confidence - exercise caution")
-                
             print("\n⚠️ DISCLAIMER: For informational purposes only. Not financial advice.")
+            
+            # Mini summary for this prediction
+            print(f"\n📝 Added to session summary. Type 'summary' to see all {len(predictor.prediction_history)} predictions.")
 
 if __name__ == "__main__":
     main()
