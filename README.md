@@ -2,50 +2,78 @@
 
 > *Fighting NFT scams with machine learning, one collection at a time!* 🚀
 
-
 ## 🎯 What is NFTruth?
 
-NFTruth is an intelligent system that analyzes NFT collections to determine their legitimacy and detect potential scams. Using machine learning algorithms trained on market data, social signals, and blockchain metrics, it provides comprehensive risk assessments for NFT collections.
+NFTruth is an intelligent system that analyzes NFT collections to determine their legitimacy and detect potential scams. Using ensemble machine learning algorithms trained on multi-source data (OpenSea marketplace data, Reddit social sentiment, and Ethereum blockchain metrics), it provides comprehensive risk assessments for NFT collections.
+
+## 🏗️ System Architecture
+
+```
+NFTruth/
+├── 🎯 app/
+│   ├── 📊 data/
+│   │   ├── opensea_collector.py      # OpenSea API integration & data collection
+│   │   ├── reddit_collector.py       # Reddit OAuth + sentiment analysis pipeline
+│   │   ├── etherscan_collector.py    # Ethereum blockchain analysis (placeholder)
+│   │   └── ml_data_transformer.py    # Feature engineering & ML data preparation
+│   ├── 🤖 models/
+│   │   ├── model.py                  # Ensemble ML model implementation
+│   │   ├── model_notebook.ipynb      # Technical documentation & explanation
+│   │   └── opensea_known_legit.py    # Curated legitimate collections database
+│   ├── 📈 model_training.py          # Synthetic data generation & training pipeline
+│   ├── 🔮 predict.py                 # Prediction interface & risk assessment
+│   └── 📋 opensea_collections.py     # Collection slug mappings
+├── 🏆 model_outputs/
+│   └── rule_based_model.json         # Rule-based baseline model
+├── 📚 training_data/                 # Generated training datasets
+├── 🧪 tests/
+│   ├── test_model_setup.py          # ML functionality validation
+│   └── test_opensea.py              # API connection testing
+├── 📋 requirements.txt              # Python dependencies
+└── 📖 README.md                     # This documentation
+```
 
 ## 🧠 How The System Works
 
 ### 📊 Multi-Source Data Collection Pipeline
 
-The system gathers comprehensive data from three major sources to build a complete picture of each NFT collection:
-
-#### 🏪 **OpenSea API Integration**
+#### 🏪 **OpenSea API Integration** ([`opensea_collector.py`](app/data/opensea_collector.py))
 ```python
-# Collection data extraction from opensea_collector.py
+# Comprehensive collection metrics extraction
 - Collection verification status (safelist_status)
-- Trading statistics (volume, floor_price, market_cap)
+- Trading statistics (total_volume, floor_price, market_cap)
 - Social presence (Discord, Twitter links)
 - Ownership metrics (total_supply, num_owners)
-- Price dynamics (average_price, price changes)
+- Price dynamics (average_price, price_changes)
+- Collection features (trait_offers_enabled, collection_offers_enabled)
 ```
 
-#### 💬 **Reddit Social Intelligence**
+#### 💬 **Reddit Social Intelligence** ([`reddit_collector.py`](app/data/reddit_collector.py))
 ```python
-# Social sentiment analysis from reddit_collector.py
-- Community mentions and engagement
-- Sentiment analysis using VADER
-- Scam keyword detection ("rugpull", "scam", "avoid")
-- Hype indicator tracking ("moon", "diamond hands", "lfg")
-- Discussion quality assessment
+# Advanced social sentiment analysis pipeline
+- OAuth 2.0 authentication with Reddit API
+- Multi-subreddit targeted data collection:
+  * crypto_general: ['cryptocurrency', 'crypto', 'CryptoMarkets']
+  * nft_specific: ['NFT', 'NFTs', 'opensea', 'NFTsMarketplace']
+  * ethereum: ['ethereum', 'ethtrader', 'ethfinance']
+  * trading_focused: ['wallstreetbets', 'CryptoMoonShots']
+- VADER sentiment analysis integration
+- Scam keyword detection: ['scam', 'rugpull', 'fake', 'fraud']
+- Hype indicator tracking: ['moon', 'diamond hands', 'hodl', 'wagmi']
 ```
 
-#### ⛓️ **Etherscan Blockchain Analysis**
+#### ⛓️ **Blockchain Analysis** ([`etherscan_collector.py`](app/data/etherscan_collector.py))
 ```python
-# Creator wallet analysis from etherscan_collector.py
+# Creator wallet and transaction analysis (framework ready)
 - Wallet age and transaction history
-- Suspicious transaction pattern detection
-- Circular trading identification (wash trading)
-- Creator balance and activity patterns
-- Mint distribution analysis
+- Suspicious pattern detection (wash trading)
+- Creator balance and activity analysis
+- Mint distribution pattern recognition
 ```
 
-### 🔬 Advanced Feature Engineering
+### 🔬 Advanced Feature Engineering ([`ml_data_transformer.py`](app/data/ml_data_transformer.py))
 
-Raw data is transformed into 20+ meaningful ML features through sophisticated engineering:
+The [`MLDataTransformer`](app/data/ml_data_transformer.py) class transforms raw data into 20+ meaningful ML features:
 
 #### 💰 **Market Intelligence Features**
 ```python
@@ -53,154 +81,142 @@ Raw data is transformed into 20+ meaningful ML features through sophisticated en
 volume_per_owner = total_volume / num_owners        # Liquidity quality
 market_efficiency = market_cap / total_volume       # Market maturity  
 price_premium = average_price / floor_price         # Pricing structure
-whale_concentration = 1 - (num_owners / total_supply) # Ownership distribution
-```
-
-#### 📈 **Trading Pattern Analysis**
-```python
-# Volatility and trading behavior
 avg_daily_volume = total_volume / collection_age_days
-volume_volatility = std([1day, 7day, 30day volumes])
-price_volatility = std([price changes over time])
-wash_trading_score = circular_transactions / total_transactions
 ```
 
 #### 🗣️ **Social Sentiment Scoring**
 ```python
-# Community engagement metrics  
+# Community engagement metrics using VADER sentiment analysis
 social_score = reddit_mentions + reddit_engagement
-sentiment_analysis = VADER_compound_score
+sentiment_analysis = SentimentIntensityAnalyzer().polarity_scores()
 scam_keyword_density = scam_mentions / total_mentions
-hype_indicator = hype_keywords / total_discussion
+hype_indicator = hype_keywords_count / total_discussion_volume
 ```
 
 #### ⛓️ **Blockchain Forensics**
 ```python
-# Creator wallet analysis
+# Creator and trading pattern analysis
 creator_wallet_age = days_since_first_transaction
-suspicious_patterns = circular_trades + rapid_transactions
-mint_distribution = uniformity_of_nft_distribution
-creator_activity_score = transaction_frequency_analysis
+wash_trading_score = circular_transactions / total_transactions
+mint_distribution_score = distribution_uniformity_analysis
+whale_concentration = 1 - (num_owners / total_supply)
 ```
 
-### 🤖 Ensemble Machine Learning Architecture
+### 🤖 Ensemble Machine Learning Architecture ([`model.py`](app/models/model.py))
 
-Four specialized algorithms work together to detect authenticity patterns:
+The [`NFTAuthenticityModel`](app/models/model.py) implements four specialized algorithms:
 
 #### 🌳 **Random Forest Classifier**
 - **Strength**: Handles complex feature interactions and mixed data types
 - **Use Case**: Captures non-linear relationships between market metrics
-- **Output**: Feature importance rankings + prediction confidence
+- **Implementation**: `RandomForestClassifier(n_estimators=100, random_state=42)`
 
 #### 🚀 **Gradient Boosting Classifier** 
 - **Strength**: Sequential learning builds strong patterns from weak signals
 - **Use Case**: Detects subtle scam indicators through iterative improvement
-- **Output**: Refined decision boundaries + prediction probability
+- **Implementation**: `GradientBoostingClassifier(random_state=42)`
 
 #### 📈 **Logistic Regression**
 - **Strength**: Interpretable linear relationships with feature scaling
 - **Use Case**: Provides explainable risk factors and coefficients
-- **Output**: Linear risk score + interpretable feature weights
+- **Implementation**: `LogisticRegression(random_state=42)` with `StandardScaler`
 
 #### 🎯 **Support Vector Machine (SVM)**
 - **Strength**: Finds optimal decision boundaries in high-dimensional space
 - **Use Case**: Separates legitimate from suspicious collections precisely
-- **Output**: Maximum margin classification + support vector identification
+- **Implementation**: `SVC(probability=True, random_state=42)` with scaling
 
 ### 🏷️ Intelligent Labeling System
 
-Since NFT authenticity ground truth is rare, the system uses a sophisticated scoring methodology:
+Since NFT authenticity ground truth is rare, the system uses a sophisticated scoring methodology in [`create_synthetic_labels()`](app/models/model.py):
 
 ```python
-# Legitimacy scoring algorithm
-legitimacy_score = 0
-
-# Verification signals (+3 points)
-if collection.safelist_status == "verified": legitimacy_score += 3
-
-# Social presence (+1 point each)
-if collection.discord_url: legitimacy_score += 1
-if collection.twitter_username: legitimacy_score += 1
-
-# Market signals (+2 points each)  
-if collection.floor_price > 0: legitimacy_score += 2
-if collection.total_volume > 1000: legitimacy_score += 2
-
-# Community signals (+1 point each)
-if collection.num_owners > 1000: legitimacy_score += 1
-if reddit_mentions > 0: legitimacy_score += 1
-
-# Whitelist verification (+3 points)
-if collection_slug in KNOWN_LEGITIMATE_COLLECTIONS: legitimacy_score += 3
-
-# Final classification
-is_legitimate = legitimacy_score >= 6  # Threshold optimization
+# Legitimacy scoring algorithm (from model.py)
+def create_synthetic_labels(self, df):
+    scores = []
+    for _, row in df.iterrows():
+        score = 0
+        
+        # Verification signals (+3 points)
+        if row.get('is_verified', False): score += 3
+        
+        # Social presence (+1 point each)
+        if row.get('has_discord', False): score += 1
+        if row.get('has_twitter', False): score += 1
+        
+        # Market signals (+2 points each)  
+        if row.get('floor_price', 0) > 0: score += 2
+        if row.get('total_volume', 0) > 1000: score += 2
+        
+        # Community signals (+1 point each)
+        if row.get('num_owners', 0) > 1000: score += 1
+        if row.get('reddit_mentions', 0) > 0: score += 1
+        
+        # Whitelist verification (+3 points)
+        collection_name = row.get('collection', '').lower()
+        if any(legit in collection_name for legit in self.known_legitimate):
+            score += 3
+            
+        scores.append(score)
+    
+    # Classification threshold: score >= 6 = legitimate
+    return [1 if score >= 6 else 0 for score in scores]
 ```
 
-### 🎯 Risk Assessment Framework
+### 📈 Synthetic Data Generation ([`model_training.py`](app/model_training.py))
 
-The system outputs comprehensive risk analysis:
+The [`generate_synthetic_nft_data()`](app/model_training.py) function creates realistic training data:
 
 ```python
-# Prediction pipeline output
+# Creates balanced dataset with realistic feature distributions
+- 65% legitimate collections (default ratio)
+- 35% suspicious collections
+- Realistic correlations between features
+- Saves timestamped JSON files in training_data/
+```
+
+## 🔍 Complete Feature Analysis
+
+### 📊 **Market Intelligence (9 features)**
+- `total_volume`, `floor_price`, `average_price`, `market_cap`
+- `volume_per_owner`, `market_efficiency`, `price_premium`
+- `avg_daily_volume`, `liquidity_indicator`
+
+### 🏷️ **Collection Properties (8 features)**  
+- `is_verified`, `safelist_status`, `has_discord`, `has_twitter`
+- `trait_offers_enabled`, `collection_offers_enabled`
+- `total_supply`, `num_owners`
+
+### 💬 **Social Intelligence (6 features)**
+- `reddit_mentions`, `reddit_engagement`, `social_score`
+- `reddit_sentiment`, `scam_keyword_density`, `hype_indicator`
+
+### ⛓️ **Blockchain Forensics (7 features)**
+- `creator_wallet_age_days`, `creator_transaction_count`
+- `wash_trading_score`, `suspicious_transaction_patterns`
+- `mint_distribution_score`, `whale_concentration`
+- `creator_balance_eth`
+
+## 🎯 Prediction Interface ([`predict.py`](app/predict.py))
+
+The system provides comprehensive risk analysis through the prediction interface:
+
+```python
+# Example prediction output
 {
-    "collection": "collection-slug",
+    "collection": "example-nft-collection",
     "prediction": "Legitimate" | "Suspicious", 
     "confidence": {
         "legitimate": 0.847,    # 84.7% confidence
         "suspicious": 0.153     # 15.3% risk
     },
-    "risk_score": 0.153,        # Inverse of legitimacy
+    "risk_score": 0.153,        # Inverse of legitimacy probability
     "risk_level": "Low",        # Categorical assessment
+    "model_used": "LogisticRegression",
     "features_analyzed": {...}, # All extracted features
-    "timestamp": "2025-06-18T..."
+    "timestamp": "2025-06-20T..."
 }
 ```
-
-## 📁 System Architecture
-
-```
-NFTruth/
-├── 🎯 app/
-│   ├── 📊 data/
-│   │   ├── opensea_collector.py      # OpenSea API integration & rate limiting
-│   │   ├── reddit_collector.py       # Reddit OAuth + sentiment analysis  
-│   │   ├── etherscan_collector.py    # Ethereum blockchain transaction analysis
-│   │   └── ml_data_transformer.py    # Feature engineering & data pipeline
-│   ├── 🤖 models/
-│   │   ├── model.py                  # Ensemble ML model implementation
-│   │   ├── model.ipynb              # Technical model explanation
-│   │   └── opensea_known_legit.py   # Curated legitimate collections database
-│   ├── 🔮 predict.py                 # Prediction interface & result formatting
-│   └── 📈 model_training.py          # Data collection & training pipeline
-├── 🧪 tests/
-│   ├── test_model_setup.py          # ML functionality validation
-│   └── test_opensea.py              # API connection testing
-└── 📋 requirements.txt              # Dependency management
-```
-
-## 🔍 Comprehensive Feature Analysis
-
-### 📊 **Market Intelligence (8 features)**
-- **Volume Metrics**: `total_volume`, `avg_daily_volume`, `volume_per_owner`
-- **Price Analysis**: `floor_price`, `average_price`, `price_premium`, `market_cap`
-- **Liquidity**: `volume_volatility`, `market_efficiency`
-
-### 🏷️ **Collection Properties (6 features)**  
-- **Verification**: `is_verified`, `safelist_status`
-- **Social Presence**: `has_discord`, `has_twitter`
-- **Market Features**: `trait_offers_enabled`, `collection_offers_enabled`
-- **Supply**: `total_supply`, `num_owners`
-
-### 💬 **Social Intelligence (4 features)**
-- **Engagement**: `reddit_mentions`, `reddit_engagement`, `social_score`
-- **Sentiment**: `reddit_sentiment`, `scam_keyword_density`, `hype_indicator`
-
-### ⛓️ **Blockchain Forensics (7 features)**
-- **Creator Analysis**: `creator_wallet_age_days`, `creator_transaction_count`
-- **Suspicious Patterns**: `wash_trading_score`, `suspicious_transaction_patterns`
-- **Distribution**: `mint_distribution_score`, `whale_concentration`
-- **Financial**: `creator_balance_eth`
 
 ## ⚠️ Risk Classification System
 
@@ -213,96 +229,74 @@ NFTruth/
 
 ## 🛠️ Technical Implementation Stack
 
-### **Core Technologies**
-- **🐍 Python 3.8+** - Primary development language
-- **🤖 scikit-learn** - Machine learning algorithms (RF, GB, LR, SVM)
-- **📊 pandas & numpy** - Data manipulation and numerical computation
-- **🔗 requests** - API client implementations
-
-### **Data Processing**
-- **💾 joblib** - Model serialization and persistence
-- **🗣️ NLTK & VADER** - Natural language processing & sentiment analysis
-- **📈 matplotlib & seaborn** - Data visualization and analysis
-
-### **External APIs**
-- **🏪 OpenSea API** - NFT marketplace data (collection stats, trading data)
-- **💬 Reddit API** - Social sentiment analysis (OAuth 2.0 integration)
-- **⛓️ Etherscan API** - Ethereum blockchain transaction data
-
-## 📈 Model Training & Evaluation Process
-
-### **1. Data Collection Phase**
+### **Core Dependencies** ([`requirements.txt`](requirements.txt))
 ```python
-# Multi-source data aggregation
-for collection in target_collections:
-    opensea_data = extract_opensea_features(collection)
-    reddit_data = extract_reddit_sentiment(collection) 
-    blockchain_data = extract_etherscan_data(collection)
-    combined_features = engineer_features(opensea_data, reddit_data, blockchain_data)
+# Machine Learning & Data Processing
+numpy, pandas, scikit-learn, joblib
+
+# API & Web Functionality  
+requests, python-dotenv
+
+# Natural Language Processing
+nltk, vaderSentiment, textblob
+
+# Data Visualization
+matplotlib, seaborn
+
+# Date Handling
+python-dateutil, pytz
 ```
 
-### **2. Feature Engineering Pipeline**
-```python
-# Advanced feature transformation
-engineered_features = [
-    volume_per_owner, market_efficiency, price_premium,
-    social_engagement_score, liquidity_indicator,
-    wash_trading_score, creator_reputation_score
-]
-```
+### **External APIs Required**
+- **🏪 OpenSea API** - Collection marketplace data
+- **💬 Reddit API** - Social sentiment analysis (OAuth 2.0)
+- **⛓️ Etherscan API** - Ethereum blockchain data
 
-### **3. Synthetic Label Generation**
-```python
-# Heuristic-based ground truth creation
-legitimacy_score = calculate_legitimacy_score(collection_features)
-is_legitimate = legitimacy_score >= LEGITIMACY_THRESHOLD
-```
+## 📊 Model Performance Metrics
 
-### **4. Multi-Model Training**
-```python
-# Ensemble approach with different algorithms
-models = {
-    'RandomForest': RandomForestClassifier(n_estimators=100),
-    'GradientBoosting': GradientBoostingClassifier(),
-    'LogisticRegression': LogisticRegression(scaled_features),
-    'SVM': SVC(probability=True, scaled_features)
-}
-```
+Based on synthetic training data evaluation:
 
-### **5. Model Selection & Persistence**
-```python
-# Performance-based model selection
-best_model = max(models, key=lambda m: f1_score(m))
-joblib.dump(best_model, 'best_nft_model.pkl')
-```
+> Logistic Regression is by far the most optimal!
 
-## 🎯 Real-World Performance Metrics
+| Model | Key Strengths | Use Case |
+|-------|---------------|----------|
+| **🏆 Logistic Regression** | Interpretable, fast, linear separability | Primary classifier for NFT authenticity |
+| 🌳 Random Forest | Feature importance, non-linear patterns | Complex interaction detection |
+| 🚀 Gradient Boosting | Sequential improvement, weak signal boosting | Subtle scam pattern recognition |
+| 🎯 SVM | Maximum margin, high-dimensional separation | Precise decision boundaries |
 
-Based on curated test dataset of NFT collections:
+## 🧪 Testing Suite
 
-| Model | Accuracy | Precision | Recall | F1-Score | ROC-AUC |
-|-------|----------|-----------|--------|----------|---------|
-| **🏆 Logistic Regression** | **100.0%** | **100.0%** | **100.0%** | **100.0%** | **100.0%** |
-| Random Forest | 83.3% | 83.3% | 100.0% | 90.9% | 97.5% |
-| Gradient Boosting | 83.3% | 83.3% | 100.0% | 90.9% | 50.0% |
-| SVM | 83.3% | 100.0% | 80.0% | 88.9% | 100.0% |
+### **Model Validation** ([`test_model_setup.py`](tests/test_model_setup.py))
+- Model initialization and training pipeline validation
+- Feature engineering functionality testing
+- Prediction interface verification
 
-*🎯 Logistic Regression achieves perfect performance, demonstrating that NFT authenticity patterns are highly linearly separable*
+### **API Integration** ([`test_opensea.py`](tests/test_opensea.py))
+- OpenSea API connection and data extraction testing
+- Rate limiting and error handling validation
 
-**Why Logistic Regression Dominates:**
-- 📊 **Linear Separability**: NFT legitimacy features form clear linear decision boundaries
-- 🎯 **Feature Quality**: Engineered features capture the essential authenticity signals
-- ⚖️ **Balanced Dataset**: Scoring system creates well-balanced training data
-- 🔍 **Interpretability**: Provides clear coefficient weights for each risk factor
+## 📚 Known Legitimate Collections ([`opensea_known_legit.py`](app/models/opensea_known_legit.py))
+
+Curated database of verified legitimate NFT collections:
+- CryptoPunks, Bored Ape Yacht Club, Azuki
+- Doodles, CloneX, Meebits, World of Women
+- Used for ground truth labeling and validation
+
+## 🔄 Data Pipeline Flow
+
+1. **Collection Input** → Collection slug or name
+2. **Data Collection** → Multi-source API calls (OpenSea, Reddit)
+3. **Feature Engineering** → Transform raw data into ML features
+4. **Model Prediction** → Ensemble voting across 4 algorithms
+5. **Risk Assessment** → Confidence scores and risk categorization
+6. **Output Generation** → Structured JSON response with analysis
 
 ## 🚀 Future Enhancement Roadmap
 
-- [ ] 🔄 **Real-time monitoring** - Live collection tracking
-- [ ] 🌐 **Web interface** - User-friendly dashboard 
-- [ ] 🤝 **Community reporting** - Crowdsourced scam detection
-- [ ] 🔗 **Multi-chain support** - Polygon, Solana, Binance Smart Chain
-- [ ] 📈 **Deep learning** - Neural networks for pattern recognition
-- [ ] 🔍 **Image analysis** - NFT artwork authenticity detection
+- [ ] 🔄 **Real-time monitoring** - Live collection tracking dashboard
+- [ ] 🌐 **Web interface** - User-friendly analysis portal
+- [ ] 🤝 **Community reporting** - Crowdsourced scam detection system
 
 ## ⚖️ Important Disclaimers
 
@@ -312,10 +306,12 @@ Based on curated test dataset of NFT collections:
 
 📊 **Data Limitations**: Predictions are based on publicly available data and may not capture all risk factors or market dynamics.
 
+🎓 **Educational Purpose**: This system demonstrates advanced ML techniques for blockchain analysis and should be used for learning and research purposes.
+
 **Always conduct your own research (DYOR) before making any financial decisions** 🧠
 
 ---
 
 *Built with ❤️ to make the NFT space safer for everyone* 🛡️
 
-**⭐ This system demonstrates advanced ML techniques for blockchain analysis**
+**⭐ Star this repository if you found it helpful!**
