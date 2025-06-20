@@ -11,6 +11,7 @@ from opensea_collections import COLLECTION_SLUGS
 from difflib import get_close_matches
 import re
 from urllib.parse import urlparse
+from typing import Dict
 
 # Load environment variables
 load_dotenv()
@@ -179,6 +180,53 @@ class NFTPredictor:
             print(f"❌ Error loading model: {e}")
             print("Make sure to train the model first by running: python3 app/models/model.py")
     
+    def _process_reddit_data(self, reddit_data: Dict) -> Dict:
+        """Process raw Reddit data into required format"""
+        total_posts = reddit_data.get('metadata', {}).get('total_posts', 0)
+        total_comments = reddit_data.get('metadata', {}).get('total_comments', 0)
+        
+        if total_posts == 0:
+            return {
+                'total_mentions': 0,
+                'avg_sentiment': 0.5,
+                'total_engagement': 0
+            }
+        
+        all_posts = reddit_data.get('all_posts', [])
+        
+        # Calculate engagement (upvotes + comments)
+        total_engagement = 0
+        sentiment_scores = []
+        
+        for post in all_posts:
+            # Engagement = upvotes + comment count
+            engagement = (post.get('ups', 0) + post.get('num_comments', 0))
+            total_engagement += engagement
+            
+            # Simple sentiment analysis based on upvote ratio and score
+            upvote_ratio = post.get('upvote_ratio', 0.5)
+            score = post.get('score', 0)
+            
+            # Convert upvote ratio to sentiment (0.5 = neutral, 1.0 = very positive)
+            # Also consider the score - higher scores generally indicate positive sentiment
+            if score > 0:
+                sentiment = min(1.0, upvote_ratio + (score / 1000) * 0.1)
+            else:
+                sentiment = max(0.0, upvote_ratio - 0.1)
+            
+            sentiment_scores.append(sentiment)
+        
+        # Calculate average sentiment
+        avg_sentiment = sum(sentiment_scores) / len(sentiment_scores) if sentiment_scores else 0.5
+        
+        print(f"📊 Reddit metrics - Mentions: {total_posts}, Sentiment: {avg_sentiment:.2f}, Engagement: {total_engagement}")
+        
+        return {
+            'total_mentions': total_posts,
+            'avg_sentiment': avg_sentiment,
+            'total_engagement': total_engagement
+        }
+
     def predict_collection(self, collection_slug: str) -> dict:
         """
         Predict authenticity for a given NFT collection
@@ -187,6 +235,13 @@ class NFTPredictor:
             return {"error": "Model not loaded"}
         
         print(f"🔍 Analyzing collection: {collection_slug}")
+        
+        # Find the collection name from the slug
+        collection_name = None
+        for name, slug in COLLECTION_SLUGS.items():
+            if slug == collection_slug:
+                collection_name = name
+                break
         
         try:
             # Collect data for this collection
@@ -197,11 +252,24 @@ class NFTPredictor:
             reddit_data = {}
             if self.reddit_collector:
                 try:
-                    reddit_data = self.reddit_collector.collect_targeted_data(collection_slug)
+                    # Use collection name if available, otherwise use slug
+                    search_term = collection_name if collection_name else collection_slug
+                    print(f"🔍 Searching Reddit for: '{search_term}'")
+                    
+                    reddit_raw_data = self.reddit_collector.collect_targeted_data(
+                        query=search_term,
+                        categories=['crypto_general', 'nft_specific', 'ethereum', 'trading_focused', 'tech_analysis', 'blockchain_general'],
+                        time_filter='month',
+                        posts_per_subreddit=15,
+                        include_comments=False
+                    )
+                    
+                    reddit_data = self._process_reddit_data(reddit_raw_data)
                 except Exception as e:
                     print(f"⚠️ Reddit data collection failed: {e}")
                     reddit_data = {'total_mentions': 0, 'avg_sentiment': 0.5, 'total_engagement': 0}
             else:
+                print("⚠️ Reddit collector not available")
                 reddit_data = {'total_mentions': 0, 'avg_sentiment': 0.5, 'total_engagement': 0}
             
             if not collection_data or not stats_data:
