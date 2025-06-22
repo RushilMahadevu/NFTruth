@@ -4,10 +4,10 @@ import numpy as np
 import pandas as pd
 import os
 from dotenv import load_dotenv
-from data.opensea_collector import get_opensea_collection, get_opensea_collection_stats
-from data.reddit_collector import RedditDataCollector
-from models.model import NFTAuthenticityModel
-from opensea_collections import COLLECTION_SLUGS
+from app.data.opensea_collector import get_opensea_collection, get_opensea_collection_stats
+from app.data.reddit_collector import RedditDataCollector
+from app.models.model import NFTAuthenticityModel
+from app.opensea_collections import COLLECTION_SLUGS
 from difflib import get_close_matches
 import re
 from urllib.parse import urlparse
