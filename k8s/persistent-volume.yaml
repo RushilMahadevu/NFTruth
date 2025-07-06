@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nftruth-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
+  hostPath:
+    path: /tmp/nftruth-data
+    type: DirectoryOrCreate
+    type: DirectoryOrCreate  # This will create the directory if it doesn't exist
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nftruth-pvc
+  namespace: nftruth
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: standard

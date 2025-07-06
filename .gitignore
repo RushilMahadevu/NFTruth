@@ -3,3 +3,4 @@
 # Model files
 model_outputs/
 app/models/
+.vercel
