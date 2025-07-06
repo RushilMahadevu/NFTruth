@@ -1,13 +1,16 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from typing import Dict, Any, Optional, List
 import sys
 import os
+from datetime import datetime
 
 # Add the parent directory to the path so we can import from app
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_root)
+
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import Dict, Any, Optional, List
+import pandas as pd
 
 # Debug: Print paths
 print(f"🔍 Current working directory: {os.getcwd()}")
@@ -222,26 +225,124 @@ def list_known_collections(limit: int = 50):
 
 @app.get("/health")
 def health_check():
-    """Detailed health check"""
+    """Health check endpoint for Docker"""
     try:
-        model_loaded = predictor.model is not None
-        scaler_loaded = predictor.scaler is not None
-        reddit_available = predictor.reddit_collector is not None
+        # Check if model is loaded
+        model_status = "loaded" if predictor.model is not None else "not_loaded"
         
         return {
             "status": "healthy",
-            "model_loaded": model_loaded,
-            "scaler_loaded": scaler_loaded,
-            "reddit_collector_available": reddit_available,
-            "feature_names_count": len(predictor.feature_names),
-            "predictions_made": len(predictor.prediction_history)
+            "model_status": model_status,
+            "reddit_collector": "enabled" if predictor.reddit_collector else "disabled",
+            "timestamp": pd.Timestamp.now().isoformat()
         }
     except Exception as e:
         return {
             "status": "unhealthy",
-            "error": str(e)
+            "error": str(e),
+            "timestamp": pd.Timestamp.now().isoformat()
         }
+
+# Add this new endpoint after your existing endpoints
+@app.get("/model-stats")
+def get_model_statistics():
+    """
+    Get model performance statistics including accuracy
+    """
+    try:
+        import json
+        import os
+        
+        # Load model metadata which contains training accuracy
+        metadata_path = os.path.join(project_root, 'model_outputs', 'model_metadata.json')
+        
+        if os.path.exists(metadata_path):
+            with open(metadata_path, 'r') as f:
+                metadata = json.load(f)
+            
+            return {
+                "model_accuracy": metadata.get('accuracy', 'N/A'),
+                "model_precision": metadata.get('precision', 'N/A'),  
+                "model_recall": metadata.get('recall', 'N/A'),
+                "model_f1_score": metadata.get('f1_score', 'N/A'),
+                "model_type": metadata.get('best_model', 'Unknown'),
+                "training_date": metadata.get('training_date', 'Unknown'),
+                "features_used": len(metadata.get('features_used', [])),
+                "training_samples": metadata.get('training_samples', 'N/A')
+            }
+        else:
+            return {
+                "error": "Model metadata not found. Please retrain the model.",
+                "accuracy": "N/A"
+            }
+            
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get model stats: {str(e)}")
+
+# Health check endpoint
+@app.get("/")
+@app.get("/health")
+async def health_check():
+    """Health check endpoint"""
+    return {
+        "status": "healthy",
+        "timestamp": datetime.now().isoformat(),
+        "service": "nftruth-api",
+        "version": "1.0.0",
+        "platform": "glitch",
+        "message": "NFTruth API is running on Glitch!"
+    }
+
+# Keep-alive endpoint for Glitch
+@app.get("/ping")
+async def ping():
+    """Keep-alive endpoint"""
+    return {"pong": True, "timestamp": datetime.now().isoformat()}
+
+# Prediction model
+class PredictionRequest(BaseModel):
+    collection_name: str
+
+@app.post("/predict")
+async def predict_nft(request: PredictionRequest):
+    """Predict NFT authenticity"""
+    try:
+        # Import your model (lazy loading to avoid startup issues)
+        from app.models.model import NFTAuthenticityModel
+        
+        model = NFTAuthenticityModel()
+        
+        # Your prediction logic here
+        result = {
+            "collection_name": request.collection_name,
+            "prediction": "legitimate",  # Replace with actual prediction
+            "confidence": 0.85,  # Replace with actual confidence
+            "timestamp": datetime.now().isoformat(),
+            "status": "success"
+        }
+        
+        return result
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
+
+# Reddit analysis endpoint
+@app.get("/analyze/{collection_name}")
+async def analyze_collection(collection_name: str):
+    """Analyze NFT collection"""
+    try:
+        # Your Reddit analysis logic
+        return {
+            "collection_name": collection_name,
+            "reddit_sentiment": 0.7,
+            "mentions": 25,
+            "analysis": "positive",
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
